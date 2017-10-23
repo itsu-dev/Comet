@@ -198,8 +198,45 @@ public class Utils {
     public static int toInt(Object number) {
         return (int) Math.round((double) number);
     }
-    
+
     public static String getType(String path){
-    	return PropertyReader.get(new File(path + File.separator + "project.proj"), "type");
+        return PropertyReader.get(new File(path + File.separator + "project.proj"), "type");
+    }
+
+    public static String getProjectName(String path){
+        String temp1[] = path.replaceAll("\\\\", "/").split("/");
+        String projectName = null;
+        int count = 0;
+
+        for(String str : temp1){
+            if(str.equals("workspace")){
+                projectName = temp1[count + 1];
+                break;
+            }
+            count++;
+        }
+
+        return projectName;
+    }
+
+    public static String getProjectPath(String path){
+        String temp1[] = path.replaceAll("\\\\", "/").split("/");
+        String result = "";
+        int count = 0;
+
+        for(String str : temp1){
+            if(str.equals("workspace")){
+                result = result + str + "/" + temp1[count + 1];
+                break;
+            }
+            result = result + str + "/";
+            count++;
+        }
+
+        return result;
+    }
+
+    public static String[] getPathArray(String path){
+        return path.replaceAll("\\\\", "/").split("/");
     }
 }

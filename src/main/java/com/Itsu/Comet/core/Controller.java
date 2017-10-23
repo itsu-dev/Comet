@@ -168,6 +168,18 @@ public class Controller {
     	return Utils.getType(path);
     }
     
+    public static String getProjectName(String path){
+    	return Utils.getProjectName(path);
+    }
+    
+    public static String getProjectPath(String path){
+    	return Utils.getProjectPath(path);
+    }
+    
+    public static String[] getPathArray(String path){
+    	return Utils.getPathArray(path);
+    }
+    
     public static void information(String message){
     	MessagePopup.information(message);
     }
