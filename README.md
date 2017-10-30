@@ -17,3 +17,4 @@ Controllerクラスをメインに動かしていて、多くの機能はこの�
 - [ ] 関数辞典/メソッド辞典  
 
 ## 参考
+http://ateraimemo.com/#Swing
