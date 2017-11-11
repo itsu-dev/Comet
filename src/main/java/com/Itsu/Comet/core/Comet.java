@@ -32,6 +32,8 @@ public class Comet extends JFrame{
         
         try {
         	splashWindow = new SplashWindow();
+        	Controller.setSplashWindow(splashWindow);
+        	Controller.setSplashText("初期化中...");
 		} catch (NullPointerException | IllegalStateException | IOException e) {
 			e.printStackTrace();
 		}
@@ -39,9 +41,13 @@ public class Comet extends JFrame{
         Comet comet = new Comet();
         instance = comet;
         
+        Controller.setSplashText("ファイルのチェック中...");
         Controller.checkFile();
 
+        Controller.setSplashText("データの取得中...");
         Controller.initData();
+        
+        Controller.setSplashText("UIを読み込み中...");
         Controller.initUI();
         //Controller.initColor();
 

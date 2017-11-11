@@ -1,6 +1,9 @@
 package com.Itsu.Comet.core;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.SplashScreen;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -18,12 +21,14 @@ import com.Itsu.Comet.project.ProjectManager;
 import com.Itsu.Comet.utils.Colors;
 import com.Itsu.Comet.utils.Data;
 import com.Itsu.Comet.utils.MessagePopup;
+import com.Itsu.Comet.utils.SplashWindow;
 import com.Itsu.Comet.utils.Utils;
 
 public class Controller {
 
     private static Data data = new Data();
     private static Colors color = new Colors();
+    private static SplashWindow splashWindow;
 
     public Controller(){
 
@@ -83,6 +88,23 @@ public class Controller {
         if(Server.isWindowActive("View1")){
             Server.removeActiveWindow(view, key);
         }
+    }
+    
+    protected static void setSplashWindow(SplashWindow splash) {
+    	splashWindow = splash;
+    }
+    
+    public static void setSplashText(String text) {
+    	SplashScreen splash = SplashScreen.getSplashScreen();
+    	 
+        Graphics g = splash.createGraphics();
+        g.setColor(new Color(48, 62, 158));
+        g.fillRect(200, 160, 250, 22);
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("ＭＳ ゴシック", Font.PLAIN, 15));
+        g.drawString(text, 250, 180);
+		
+        splash.update();
     }
 
     public static void setDesktopPane(JDesktopPane pane){
