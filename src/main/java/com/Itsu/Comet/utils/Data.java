@@ -3,6 +3,7 @@ package com.Itsu.Comet.utils;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
@@ -38,6 +39,8 @@ public class Data implements Serializable{
     private ImageIcon data;
     private ImageIcon text;
     private ImageIcon image;
+    
+    private Image icon;
 
 
     public Data(){
@@ -66,6 +69,8 @@ public class Data implements Serializable{
         data = new ImageIcon(ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("Comet/images/data.png")));
         text = new ImageIcon(ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("Comet/images/text.png")));
         image = new ImageIcon(ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("Comet/images/image.png")));
+        
+        icon = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("Comet/images/icon.png"));
         
         systemFont = initSystemFont();
         
@@ -151,6 +156,10 @@ public class Data implements Serializable{
 
     public ImageIcon getImageIcon(){
         return image;
+    }
+    
+    public Image getIcon(){
+        return icon;
     }
     
     public String getSystemFont(){

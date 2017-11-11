@@ -3,6 +3,7 @@ package com.Itsu.Comet.core;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.io.IOException;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -10,12 +11,15 @@ import javax.swing.JFrame;
 import com.Itsu.Comet.gui.Editor;
 import com.Itsu.Comet.gui.MenuBar;
 import com.Itsu.Comet.gui.Window;
+import com.Itsu.Comet.utils.SplashWindow;
 import com.Itsu.Comet.utils.Version;
 
 public class Comet extends JFrame{
 
     private JDesktopPane mdi;
     private static Comet instance;
+    
+    private static SplashWindow splashWindow;
 
     public Comet(){
     	
@@ -25,6 +29,12 @@ public class Comet extends JFrame{
         System.setProperty("awt.useSystemAAFontSettings","on");
         System.setProperty("swing.aatext", "true");
         Toolkit.getDefaultToolkit().setDynamicLayout(true);
+        
+        try {
+        	splashWindow = new SplashWindow();
+		} catch (NullPointerException | IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
 
         Comet comet = new Comet();
         instance = comet;
@@ -46,6 +56,7 @@ public class Comet extends JFrame{
         this.setLayout(new BorderLayout());
         this.setJMenuBar(new MenuBar());
         this.setDefaultCloseOperation(type);
+        this.setIconImage(Controller.getDataObject().getIcon());
 
         mdi = new JDesktopPane();
         mdi.setBackground(Color.LIGHT_GRAY);
