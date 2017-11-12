@@ -18,38 +18,36 @@ public class Comet extends JFrame{
 
     private JDesktopPane mdi;
     private static Comet instance;
-    
-    private static SplashWindow splashWindow;
 
     public Comet(){
-    	
+
     }
 
     public static void main(String[] args){
         System.setProperty("awt.useSystemAAFontSettings","on");
         System.setProperty("swing.aatext", "true");
         Toolkit.getDefaultToolkit().setDynamicLayout(true);
-        
+
         try {
-        	splashWindow = new SplashWindow();
-        	Controller.setSplashWindow(splashWindow);
-        	Controller.setSplashText("初期化中...");
-		} catch (NullPointerException | IllegalStateException | IOException e) {
-			e.printStackTrace();
-		}
+            new SplashWindow();
+            Controller.setSplashText("初期化中...");
+        } catch (NullPointerException | IllegalStateException | IOException e) {
+            e.printStackTrace();
+        }
 
         Comet comet = new Comet();
         instance = comet;
-        
+
         Controller.setSplashText("ファイルのチェック中...");
         Controller.checkFile();
 
         Controller.setSplashText("データの取得中...");
         Controller.initData();
-        
+        Controller.initSkinColor();
+        Controller.initJavaColor();
+        Controller.initPHPColor();
         Controller.setSplashText("UIを読み込み中...");
         Controller.initUI();
-        //Controller.initColor();
 
         comet.installGui(JFrame.EXIT_ON_CLOSE);
     }

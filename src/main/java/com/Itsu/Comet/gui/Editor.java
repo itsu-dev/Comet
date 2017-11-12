@@ -1,7 +1,6 @@
 package com.Itsu.Comet.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class Editor extends View{
         w = (int) Controller.getJFrame().getWidth();
         h = (int) Controller.getJFrame().getHeight() - 90;
 
-        this.setBackground(Color.WHITE);
+        this.setBackground(Controller.getColors().get("BACKGROUND"));
         this.setBounds((int) (w * 0.2), 0, (int) (w * 0.8), h);
         this.setView(this);
         this.setViewKey("Editor");

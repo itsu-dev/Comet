@@ -1,6 +1,5 @@
 package com.Itsu.Comet.editor;
 
-import java.awt.Color;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +12,8 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
+
+import com.Itsu.Comet.core.Controller;
 
 public class PHPSyntaxHighliter extends DefaultStyledDocument implements SyntaxHighliter{
     private static final char LB = '\n';
@@ -40,41 +41,41 @@ public class PHPSyntaxHighliter extends DefaultStyledDocument implements SyntaxH
 
         //System token
         keyword = new SimpleAttributeSet();
-        StyleConstants.setForeground(keyword, new Color(128, 0, 64));
+        StyleConstants.setForeground(keyword, Controller.getPHPColors().get("keyword"));
         StyleConstants.setBold(keyword, true);
 
         keyword1 = new SimpleAttributeSet();
-        StyleConstants.setForeground(keyword1, Color.BLUE);
+        StyleConstants.setForeground(keyword1, Controller.getPHPColors().get("keyword1"));
         StyleConstants.setBold(keyword1, true);
         StyleConstants.setUnderline(keyword1, true);
 
         keyword2 = new SimpleAttributeSet();
-        StyleConstants.setForeground(keyword2, Color.RED);
+        StyleConstants.setForeground(keyword2, Controller.getPHPColors().get("keyword2"));
 
         variable = new SimpleAttributeSet();
-        StyleConstants.setForeground(variable, new Color(255,20,147));
+        StyleConstants.setForeground(variable, Controller.getPHPColors().get("variable"));
 
         //"return" token
         returnToken = new SimpleAttributeSet();
-        StyleConstants.setForeground(returnToken, new Color(128, 0, 64));
+        StyleConstants.setForeground(returnToken, Controller.getPHPColors().get("returnToken"));
         StyleConstants.setUnderline(returnToken, true);
         StyleConstants.setBold(returnToken, true);
 
         //comment token
         comment = new SimpleAttributeSet();
-        StyleConstants.setForeground(comment, Color.BLUE);
+        StyleConstants.setForeground(comment, Controller.getPHPColors().get("comment"));
 
         //one line commentout
         oneLineCom = new SimpleAttributeSet();
-        StyleConstants.setForeground(oneLineCom, new Color(76,175,80));
+        StyleConstants.setForeground(oneLineCom, Controller.getPHPColors().get("oneLineCom"));
 
         //multi line commentout
         multiLineCom = new SimpleAttributeSet();
-        StyleConstants.setForeground(multiLineCom, new Color(76,175,80));
+        StyleConstants.setForeground(multiLineCom, Controller.getPHPColors().get("multiLineCom"));
 
         //normal text
         text = new SimpleAttributeSet();
-        StyleConstants.setForeground(text, Color.BLACK);
+        StyleConstants.setForeground(text, Controller.getPHPColors().get("text"));
 
         keywords = new HashSet<String>();
         keywords.add( "__halt_compiler" );

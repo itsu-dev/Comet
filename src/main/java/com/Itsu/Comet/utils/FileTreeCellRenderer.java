@@ -10,6 +10,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeCellRenderer;
 
+import com.Itsu.Comet.core.Controller;
 import com.Itsu.Comet.project.ProjectManager;
 
 public class FileTreeCellRenderer extends DefaultTreeCellRenderer {
@@ -24,11 +25,11 @@ public class FileTreeCellRenderer extends DefaultTreeCellRenderer {
         JLabel c = (JLabel) renderer.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
         if (selected) {
             c.setOpaque(false);
-            c.setForeground(getTextSelectionColor());
+            c.setForeground(Controller.getColors().get("EDITOR_TEXT"));
             //c.setBackground(Color.BLUE); //getBackgroundSelectionColor());
         } else {
             c.setOpaque(true);
-            c.setForeground(getTextNonSelectionColor());
+            c.setForeground(Controller.getColors().get("EDITOR_TEXT"));
             c.setBackground(getBackgroundNonSelectionColor());
         }
         if (value instanceof DefaultMutableTreeNode) {

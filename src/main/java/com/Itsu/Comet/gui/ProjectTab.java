@@ -1,6 +1,5 @@
 package com.Itsu.Comet.gui;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.io.File;
 import java.util.Arrays;
@@ -11,6 +10,7 @@ import javax.swing.filechooser.FileSystemView;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
+import com.Itsu.Comet.core.Controller;
 import com.Itsu.Comet.listener.FolderSelectionListener;
 import com.Itsu.Comet.ui.BlackScrollBarUI;
 import com.Itsu.Comet.utils.FileTreeCellRenderer;
@@ -37,7 +37,7 @@ public class ProjectTab extends JScrollPane{
         }
 		
         tree = new JTree(treeModel);
-		tree.setBackground(Color.WHITE);
+		tree.setBackground(Controller.getColors().get("EDITOR"));
 		tree.setRootVisible(false);
 		tree.addTreeSelectionListener(new FolderSelectionListener(fileSystemView));
 		tree.setCellRenderer(new FileTreeCellRenderer(tree.getCellRenderer(), fileSystemView));
@@ -47,8 +47,8 @@ public class ProjectTab extends JScrollPane{
         this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         this.setAutoscrolls(true);
-        this.setBackground(new Color(197,202,233));
-        this.setForeground(Color.LIGHT_GRAY);
+        this.setBackground(Controller.getColors().get("EDITOR"));
+        this.setForeground(Controller.getColors().get("EDITOR_TEXT"));
         this.getHorizontalScrollBar().setUI(new BlackScrollBarUI());
         this.getVerticalScrollBar().setUI(new BlackScrollBarUI());
         this.setPreferredSize(new Dimension(320, 240));
@@ -70,7 +70,7 @@ public class ProjectTab extends JScrollPane{
         }
 		
         tree = new JTree(treeModel);
-		tree.setBackground(Color.WHITE);
+		tree.setBackground(Controller.getColors().get("EDITOR"));
 		tree.setRootVisible(false);
 		tree.addTreeSelectionListener(new FolderSelectionListener(fileSystemView));
 		tree.setCellRenderer(new FileTreeCellRenderer(tree.getCellRenderer(), fileSystemView));
@@ -79,8 +79,8 @@ public class ProjectTab extends JScrollPane{
         this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         this.setAutoscrolls(true);
-        this.setBackground(new Color(197,202,233));
-        this.setForeground(Color.LIGHT_GRAY);
+        this.setBackground(Controller.getColors().get("EDITOR"));
+        this.setForeground(Controller.getColors().get("EDITOR_TEXT"));
         this.getHorizontalScrollBar().setUI(new BlackScrollBarUI());
         this.getVerticalScrollBar().setUI(new BlackScrollBarUI());
         this.setPreferredSize(new Dimension(320, 240));

@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
+import com.Itsu.Comet.core.Controller;
 import com.Itsu.Comet.listener.DragWindowListener;
 
 public class View extends JInternalFrame{
@@ -20,7 +21,7 @@ public class View extends JInternalFrame{
 	private DragWindowListener wl = new DragWindowListener();
 	
 	public View(String titleText){
-		this.setBorder(BorderFactory.createLineBorder(new Color(48,63,159)));
+		this.setBorder(BorderFactory.createLineBorder(Controller.getColors().get(5)));
 		this.setLayout(new BorderLayout());
 		this.setClosable(true);
 		this.setResizable(true);
@@ -38,7 +39,7 @@ public class View extends JInternalFrame{
 		
 		titlebar = new JPanel();
 		titlebar.setMaximumSize(new Dimension(this.getWidth(), 15));
-		titlebar.setBackground(new Color(121,134,203));
+		titlebar.setBackground(Controller.getColors().get("TITLE_BAR"));
 		titlebar.setLayout(new FlowLayout(FlowLayout.LEFT));
 		titlebar.add(title);
 		titlebar.addMouseListener(wl);

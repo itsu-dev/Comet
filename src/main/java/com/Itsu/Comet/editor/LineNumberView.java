@@ -19,6 +19,8 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
 import javax.swing.text.Element;
 
+import com.Itsu.Comet.core.Controller;
+
 public class LineNumberView extends JComponent {
     private static final int MARGIN = 5;
     private final JTextPane textArea;
@@ -60,8 +62,8 @@ public class LineNumberView extends JComponent {
             BorderFactory.createMatteBorder(0, 0, 0, 1, Color.GRAY),
             BorderFactory.createEmptyBorder(i.top, MARGIN, i.bottom, MARGIN - 1)));
         setOpaque(true);
-        setBackground(Color.WHITE);
-        setForeground(Color.GRAY);
+        setBackground(Controller.getColors().get("EDITOR"));
+        setForeground(Controller.getColors().get("LINE_NUMBER"));
         setFont(font);
     }
     private int getComponentWidth() {

@@ -1,7 +1,6 @@
 package com.Itsu.Comet.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 
 import javax.swing.JComponent;
 import javax.swing.JTabbedPane;
@@ -25,7 +24,7 @@ public class Window extends View{
         System.out.println(h);
 
 
-        this.setBackground(Color.WHITE);
+        this.setBackground(Controller.getColors().get("BACKGROUND"));
         this.setBounds(0, 0, (int) (w * 0.2), h);
         this.setView(this);
         this.setViewKey("View1");

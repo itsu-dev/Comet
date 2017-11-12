@@ -1,6 +1,5 @@
 package com.Itsu.Comet.gui;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,7 +44,7 @@ public class MenuBar extends JMenuBar implements ActionListener{
         initWindow();
         initNukkit();
 
-        this.setBackground(new Color(63,81,181));
+        this.setBackground(Controller.getColors().get("MENU_BAR"));
         this.add(file);
         this.add(edit);
         this.add(window);

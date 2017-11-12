@@ -14,10 +14,12 @@ import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 
+import com.Itsu.Comet.core.Controller;
+
 public class JavaSyntaxHighliter extends DefaultStyledDocument implements SyntaxHighliter{
     private static final char LB = '\n';
     private static final String OPERANDS = ".,(){;";
-    private static Color O = Color.GRAY;
+    private static Color O;;
 
     private MutableAttributeSet keyword;
     private MutableAttributeSet text;
@@ -33,33 +35,35 @@ public class JavaSyntaxHighliter extends DefaultStyledDocument implements Syntax
 
     public JavaSyntaxHighliter() {
         super();
+        
+        O = Controller.getJavaColors().get("annotation");
 
         //System token
         keyword = new SimpleAttributeSet();
-        StyleConstants.setForeground(keyword, new Color(128, 0, 64));
+        StyleConstants.setForeground(keyword, Controller.getJavaColors().get("keyword"));
         StyleConstants.setBold(keyword, true);
 
         //"return" token
         returnToken = new SimpleAttributeSet();
-        StyleConstants.setForeground(returnToken, new Color(128, 0, 64));
+        StyleConstants.setForeground(returnToken, Controller.getJavaColors().get("returnToken"));
         StyleConstants.setUnderline(returnToken, true);
         StyleConstants.setBold(returnToken, true);
 
         //comment token
         comment = new SimpleAttributeSet();
-        StyleConstants.setForeground(comment, Color.BLUE);
+        StyleConstants.setForeground(comment, Controller.getJavaColors().get("comment"));
 
         //one line commentout
         oneLineCom = new SimpleAttributeSet();
-        StyleConstants.setForeground(oneLineCom, new Color(76,175,80));
+        StyleConstants.setForeground(oneLineCom, Controller.getJavaColors().get("oneLineCom"));
 
         //multi line commentout
         multiLineCom = new SimpleAttributeSet();
-        StyleConstants.setForeground(multiLineCom, new Color(76,175,80));
+        StyleConstants.setForeground(multiLineCom, Controller.getJavaColors().get("multiLineCom"));
 
         //normal text
         text = new SimpleAttributeSet();
-        StyleConstants.setForeground(text, Color.BLACK);
+        StyleConstants.setForeground(text, Controller.getJavaColors().get("text"));
 
         keywords = new HashSet<String>();
         keywords.add( "abstract" );

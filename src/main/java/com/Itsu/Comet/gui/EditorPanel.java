@@ -14,6 +14,7 @@ import javax.swing.text.StyledDocument;
 import javax.swing.text.TabSet;
 import javax.swing.text.TabStop;
 
+import com.Itsu.Comet.core.Controller;
 import com.Itsu.Comet.editor.IndentAction;
 import com.Itsu.Comet.editor.LineNumberView;
 import com.Itsu.Comet.editor.SyntaxHighliter;
@@ -48,8 +49,8 @@ public class EditorPanel extends JScrollPane{
     	}
     	
     	jp.setPreferredSize(this.getMaximumSize());
-        jp.setBackground(Color.WHITE);
-        jp.setForeground(Color.BLACK);
+        jp.setBackground(Controller.getColors().get("EDITOR"));
+        jp.setForeground(Controller.getColors().get("EDITOR_TEXT"));
         jp.setCaretColor(new Color(14, 139, 252));
         jp.setSelectionColor(new Color(25,118,210));
         jp.setSelectedTextColor(Color.WHITE);

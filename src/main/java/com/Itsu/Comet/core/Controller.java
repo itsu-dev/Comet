@@ -6,7 +6,7 @@ import java.awt.Graphics;
 import java.awt.SplashScreen;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.util.Map;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -21,14 +21,12 @@ import com.Itsu.Comet.project.ProjectManager;
 import com.Itsu.Comet.utils.Colors;
 import com.Itsu.Comet.utils.Data;
 import com.Itsu.Comet.utils.MessagePopup;
-import com.Itsu.Comet.utils.SplashWindow;
 import com.Itsu.Comet.utils.Utils;
 
 public class Controller {
 
     private static Data data = new Data();
     private static Colors color = new Colors();
-    private static SplashWindow splashWindow;
 
     public Controller(){
 
@@ -63,17 +61,17 @@ public class Controller {
             Server.removeActiveWindow(view, key);
         }
     }
-    
+
     public static Editor getEditor(){
-    	return Server.getEditor();
+        return Server.getEditor();
     }
-    
+
     public static void setProjectTab(ProjectTab tab){
-    	Server.setProjectTab(tab);
+        Server.setProjectTab(tab);
     }
-    
+
     public static ProjectTab getProjectTab(){
-    	return Server.getProjectTab();
+        return Server.getProjectTab();
     }
 
     public static void openView1(View view, String key){
@@ -89,21 +87,17 @@ public class Controller {
             Server.removeActiveWindow(view, key);
         }
     }
-    
-    protected static void setSplashWindow(SplashWindow splash) {
-    	splashWindow = splash;
-    }
-    
+
     public static void setSplashText(String text) {
-    	SplashScreen splash = SplashScreen.getSplashScreen();
-    	 
+        SplashScreen splash = SplashScreen.getSplashScreen();
+
         Graphics g = splash.createGraphics();
         g.setColor(new Color(48, 62, 158));
         g.fillRect(200, 160, 250, 22);
         g.setColor(Color.WHITE);
         g.setFont(new Font("ＭＳ ゴシック", Font.PLAIN, 15));
         g.drawString(text, 250, 180);
-		
+
         splash.update();
     }
 
@@ -114,7 +108,7 @@ public class Controller {
     public static JDesktopPane getDesktopPane(){
         return Server.getDesktopPane();
     }
-    
+
     public static void setJFrame(JFrame frame){
         Server.setJFrame(frame);
     }
@@ -122,21 +116,21 @@ public class Controller {
     public static JFrame getJFrame(){
         return Server.getJFrame();
     }
-    
+
     public static void setNowProject(String proj){
-    	Server.setNowProject(proj);
+        Server.setNowProject(proj);
     }
-    
+
     public static String getNowProject(){
-    	return Server.getNowProject();
+        return Server.getNowProject();
     }
-    
+
     public static void setNowProjectPath(String proj){
-    	Server.setNowProjectPath(proj);
+        Server.setNowProjectPath(proj);
     }
-    
+
     public static String getNowProjectPath(){
-    	return Server.getNowProjectPath();
+        return Server.getNowProjectPath();
     }
 
     public static void newWindow(){
@@ -155,63 +149,83 @@ public class Controller {
         });
         th.start();
     }
-    
+
     public static void openProjectSetter(){
-    	ProjectSetter.showWindow();
+        ProjectSetter.showWindow();
     }
-    
+
     public static void openNukkitTest(){
-    	NukkitTest.showWindow();
+        NukkitTest.showWindow();
+    }
+
+    public static void initSkinColor(){
+        color.initSkinColor("BLACK");
     }
     
-    public static void initColor(){
-    	color.init();
+    public static void initJavaColor(){
+        color.initJavaColor("BLACK");
     }
     
-    public static List<Color> getBlackColors(){
-    	return color.getBlackColors();
+    public static void initPHPColor(){
+        color.initPHPColor("BLACK");
+    }
+
+    public static Map<String, Color> getColors(){
+        return color.getColors();
     }
     
+    public static Map<String, Color> getJavaColors(){
+        return color.getJavaColors();
+    }
+    
+    public static Map<String, Color> getPHPColors(){
+        return color.getPHPColors();
+    }
+
+    public static Map<String, Color> getTabColor(String type) {
+        return color.getTabColor(type);
+    }
+
     public static void checkFile(){
-    	new FileChecker().check();
+        new FileChecker().check();
     }
-    
+
     public static boolean makeProject(String name, String type){
-    	boolean bool = ProjectMaker.makeProject("./workspace/", name, type);
-    	Controller.getProjectTab().update();
-    	return bool;
+        boolean bool = ProjectMaker.makeProject("./workspace/", name, type);
+        Controller.getProjectTab().update();
+        return bool;
     }
-    
+
     public static void openFile(File file){
-    	ProjectManager.openFile(file);
+        ProjectManager.openFile(file);
     }
-    
+
     public static String getType(String path){
-    	return Utils.getType(path);
+        return Utils.getType(path);
     }
-    
+
     public static String getProjectName(String path){
-    	return Utils.getProjectName(path);
+        return Utils.getProjectName(path);
     }
-    
+
     public static String getProjectPath(String path){
-    	return Utils.getProjectPath(path);
+        return Utils.getProjectPath(path);
     }
-    
+
     public static String[] getPathArray(String path){
-    	return Utils.getPathArray(path);
+        return Utils.getPathArray(path);
     }
-    
+
     public static void information(String message){
-    	MessagePopup.information(message);
+        MessagePopup.information(message);
     }
-    
+
     public static void alert(String message){
-    	MessagePopup.alert(message);
+        MessagePopup.alert(message);
     }
-    
+
     public static void error(String message){
-    	MessagePopup.error(message);
+        MessagePopup.error(message);
     }
 
 }
