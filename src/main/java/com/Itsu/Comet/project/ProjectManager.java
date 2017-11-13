@@ -58,6 +58,8 @@ public class ProjectManager {
             }else{
                 Controller.getEditor().addTab(name, path, new EditorPanel(null, texts));
             }
+            
+            //Controller.getJFrame().setTitle("Comet " + Version.VERSION + " - " + path);
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -12,7 +12,7 @@ import com.Itsu.Comet.ui.SimpleTabbedPaneUI;
 
 public class Editor extends View{
 
-    private JTabbedPane tab;
+    private SimpleTabbedPane tab;
     private int w;
     private int h;
 
@@ -35,7 +35,7 @@ public class Editor extends View{
     }
 
     private void createGui(){
-        tab = new JTabbedPane();
+        tab = new SimpleTabbedPane();
         tab.setUI(new SimpleTabbedPaneUI());
         /*
         tab.addChangeListener(new ChangeListener(){
@@ -66,6 +66,7 @@ public class Editor extends View{
 					}
 					
 					Controller.setNowProject(projectName);
+		            Controller.getJFrame().setTitle("Comet " + Version.VERSION + " - " + Controller.getNowProjectPath());
 					
 					System.out.println(projectName);
 				}catch(ArrayIndexOutOfBoundsException ex){

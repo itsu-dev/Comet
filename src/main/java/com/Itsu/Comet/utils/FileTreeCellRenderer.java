@@ -25,8 +25,8 @@ public class FileTreeCellRenderer extends DefaultTreeCellRenderer {
         JLabel c = (JLabel) renderer.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
         if (selected) {
             c.setOpaque(false);
-            c.setForeground(Controller.getColors().get("EDITOR_TEXT"));
-            //c.setBackground(Color.BLUE); //getBackgroundSelectionColor());
+            c.setForeground(Controller.getColors().get(6));
+            c.setBackground(Controller.getColors().get("MENU_BAR_SELECT")); //getBackgroundSelectionColor());
         } else {
             c.setOpaque(true);
             c.setForeground(Controller.getColors().get("EDITOR_TEXT"));

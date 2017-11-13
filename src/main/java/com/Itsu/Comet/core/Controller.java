@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
+import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 
@@ -131,6 +132,10 @@ public class Controller {
 
     public static String getNowProjectPath(){
         return Server.getNowProjectPath();
+    }
+    
+    public static ImageIcon getIcon(String filename) {
+    	return Utils.getIcon(filename);
     }
 
     public static void newWindow(){

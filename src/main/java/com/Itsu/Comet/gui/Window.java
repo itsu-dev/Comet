@@ -3,14 +3,13 @@ package com.Itsu.Comet.gui;
 import java.awt.BorderLayout;
 
 import javax.swing.JComponent;
-import javax.swing.JTabbedPane;
 
 import com.Itsu.Comet.core.Controller;
 import com.Itsu.Comet.ui.SimpleTabbedPaneUI;
 
 public class Window extends View{
 
-    private JTabbedPane tab;
+    private SimpleTabbedPane tab;
     private int w;
     private int h;
     public static final int PROJECT = 0;
@@ -44,7 +43,7 @@ public class Window extends View{
     }
 
     private void createGui(){
-        tab = new JTabbedPane();
+        tab = new SimpleTabbedPane();
         tab.setUI(new SimpleTabbedPaneUI());
         this.add(tab, BorderLayout.CENTER);
     }

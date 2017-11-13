@@ -20,6 +20,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.UUID;
 
+import javax.swing.ImageIcon;
+
+import com.Itsu.Comet.core.Controller;
+
 public class Utils {
 
     public static void writeFile(String fileName, String content) throws IOException {
@@ -238,5 +242,44 @@ public class Utils {
 
     public static String[] getPathArray(String path){
         return path.replaceAll("\\\\", "/").split("/");
+    }
+    
+    public static ImageIcon getIcon(String filename) {
+    	
+    	if(filename.endsWith(".java")){
+    		return Controller.getDataObject().getJavaIcon();
+    		
+    	}else if(filename.endsWith(".php")){
+    		return Controller.getDataObject().getPHPIcon();
+    		
+    	}else if(filename.endsWith(".txt")
+    			|| filename.endsWith(".text")){
+    		return Controller.getDataObject().getTextIcon();
+    		
+    	}else if(filename.endsWith(".json")
+    			|| filename.endsWith(".yml")
+    			|| filename.endsWith(".yaml")
+    			|| filename.endsWith(".properties")
+    			|| filename.endsWith(".prop")){
+    		return Controller.getDataObject().getDataIcon();
+    		
+    	}else if(filename.endsWith(".png")
+    			|| filename.endsWith(".jpg")
+    			|| filename.endsWith(".jpeg")
+    			|| filename.endsWith(".bmp")
+    			|| filename.endsWith(".jpg")
+    			|| filename.endsWith(".gif")
+    			|| filename.endsWith(".tiff")
+    			|| filename.endsWith(".svg")
+    			|| filename.endsWith(".ico")
+    			|| filename.endsWith(".epsf")
+    			|| filename.endsWith(".icns")
+    			|| filename.endsWith(".pict")){
+    		return Controller.getDataObject().getImageIcon();
+    	
+    	}else{
+    		return Controller.getDataObject().getTextIcon();
+    	}
+    	
     }
 }

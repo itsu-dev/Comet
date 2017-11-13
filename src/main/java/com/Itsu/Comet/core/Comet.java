@@ -46,6 +46,7 @@ public class Comet extends JFrame{
         Controller.initSkinColor();
         Controller.initJavaColor();
         Controller.initPHPColor();
+        
         Controller.setSplashText("UIを読み込み中...");
         Controller.initUI();
 
