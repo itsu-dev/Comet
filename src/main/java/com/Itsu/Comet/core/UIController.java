@@ -55,6 +55,7 @@ public class UIController {
         UIManager.put("InternalFrame.maximizeIcon", data.getMaxIcon());
         UIManager.put("InternalFrame.minimizeIcon", data.getMinIcon());
         UIManager.put("InternalFrame.iconifyIcon", data.getIconFlyIcon());
+        UIManager.put("Separator.foreground", Color.LIGHT_GRAY);
 	}
 
 }

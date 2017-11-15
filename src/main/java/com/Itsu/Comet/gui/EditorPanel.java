@@ -5,9 +5,18 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Document;
+import javax.swing.text.Highlighter;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
@@ -18,62 +27,92 @@ import com.Itsu.Comet.core.Controller;
 import com.Itsu.Comet.editor.IndentAction;
 import com.Itsu.Comet.editor.LineNumberView;
 import com.Itsu.Comet.editor.SyntaxHighliter;
+import com.Itsu.Comet.listener.HighlightListener;
 import com.Itsu.Comet.ui.BlackScrollBarUI;
 import com.Itsu.Comet.utils.EditorFont;
 
 public class EditorPanel extends JScrollPane{
 
+    private final transient Highlighter.HighlightPainter currentPainter   = new DefaultHighlighter.DefaultHighlightPainter(new Color(56, 250, 46));
+    private final transient Highlighter.HighlightPainter highlightPainter = new DefaultHighlighter.DefaultHighlightPainter(new Color(87, 253, 203));
+
+    private int current;
+
+    private Highlighter highlighter;
+
     private IndentAction ia = new IndentAction();
+    private LineNumberView view;
     private JTextPane jp = new JTextPane(){
-    	@Override
-    	public boolean getScrollableTracksViewportWidth() {
-    		return false;
-    	}
+        @Override
+        public boolean getScrollableTracksViewportWidth() {
+            return false;
+        }
     };
-    
+
     private boolean period = true;
-    
+
     public EditorPanel(SyntaxHighliter jsh){
-    	this(jsh, null);
+        this(jsh, null);
     }
 
     public EditorPanel(SyntaxHighliter jsh, String text){
-    	this.setViewportView(jp);
-    	
-    	if(jsh != null){
-    		jp.setStyledDocument((StyledDocument) jsh);
-    	}
-    	
-    	if(text != null){
-    		jp.setText(text);
-    	}
-    	
-    	jp.setPreferredSize(this.getMaximumSize());
+        this.setViewportView(jp);
+
+        if(jsh != null){
+            jp.setStyledDocument((StyledDocument) jsh);
+        }
+
+        if(text != null){
+            jp.setText(text);
+        }
+
+        view = new LineNumberView(jp);
+
+        jp.setPreferredSize(this.getMaximumSize());
         jp.setBackground(Controller.getColors().get("EDITOR"));
         jp.setForeground(Controller.getColors().get("EDITOR_TEXT"));
         jp.setCaretColor(new Color(14, 139, 252));
         jp.setSelectionColor(new Color(25,118,210));
         jp.setSelectedTextColor(Color.WHITE);
         jp.setFont(new Font(new EditorFont().createEditorFont().getName(), Font.PLAIN, 14));
+        jp.setComponentPopupMenu(new TextPanePopup());
+        jp.addMouseListener(new TextPaneListener(this));
+        jp.getDocument().addDocumentListener(new HighlightListener(this));
         jp.addKeyListener(new KeyListener(){
             public void keyPressed(KeyEvent e){
                 String insert = null;
                 String str = null;
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){ /*Enterキーが押されたら*/
-                    e.consume(); /* 入力をキャンセル */
-                    for(int i=0; i<ia.getTabSize(jp); i++){ insert += "\t"; }/*Tab数分の\tを加算*/
-	                    insert = "\n" + insert; /*頭に改行を入れて*/
-	                    insert = insert.replaceAll("null", "");
-	                    jp.replaceSelection(insert);
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                    e.consume();
+                    for(int i=0; i<ia.getTabSize(jp); i++){
+                        insert += "\t";
+                    }
+                        insert = "\n" + insert;
+                        insert = insert.replaceAll("null", "");
+                        jp.replaceSelection(insert);
+
                 }
                 /*else if(e.getKeyCode() == KeyEvent.VK_PERIOD){
-                	if(period){
-                		new AutoGUI(jp.getMousePosition().x, jp.getMousePosition().y);modelToView
-                	}else{
-                		period = true;
-                	}
-                }
-                */
+                    if(period){
+                        Document doc = jp.getDocument();
+                        Element root = doc.getDefaultRootElement();
+                        int caret = root.getElementIndex(jp.getCaretPosition()) + 1;
+
+                        caret = Math.max(1, Math.min(root.getElementCount(), caret));
+                        try {
+                          Element elem = root.getElement(caret - 1);
+                          Rectangle rect = jp.modelToView(elem.getStartOffset());
+
+                          System.out.println(rect.width + "::" + rect.height + "::" + rect.x + "::" + rect.y);
+
+                          new AutoGUI(rect.width, rect.height);
+
+                        } catch (BadLocationException ex) {
+                        }
+                    }else{
+                        period = true;
+                    }
+                }*/
             }
                 public void keyReleased(KeyEvent e){}
                 public void keyTyped(KeyEvent e){}
@@ -99,7 +138,67 @@ public class EditorPanel extends JScrollPane{
         this.setForeground(Color.LIGHT_GRAY);
         this.getHorizontalScrollBar().setUI(new BlackScrollBarUI());
         this.getVerticalScrollBar().setUI(new BlackScrollBarUI());
-        this.setRowHeaderView(new LineNumberView(jp));
+        this.setRowHeaderView(view);
     }
-    
+
+    private Optional<Pattern> getPattern() {
+        String text = jp.getSelectedText();
+
+        if (Objects.isNull(text) || text.isEmpty()) {
+            return Optional.empty();
+        }
+        String cw = "\\b";
+        String pattern = String.format("%s%s%s", cw, text, cw);
+        int flags = 0;
+        try {
+            return Optional.of(Pattern.compile(pattern, flags));
+        } catch (PatternSyntaxException ex) {
+            return Optional.empty();
+        }
+    }
+
+    public void changeHighlight() {
+        highlighter = jp.getHighlighter();
+        highlighter.removeAllHighlights();
+        
+        Document doc = jp.getDocument();
+        getPattern().ifPresent(pattern -> {
+            try {
+                Matcher matcher = pattern.matcher(doc.getText(0, doc.getLength()));
+                int pos = 0;
+                while (matcher.find(pos)) {
+                    int start = matcher.start();
+                    int end   = matcher.end();
+                    highlighter.addHighlight(start, end, highlightPainter);
+                    pos = end;
+                }
+            } catch (BadLocationException ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        Highlighter.Highlight[] array = highlighter.getHighlights();
+        int hits = array.length;
+        if (hits == 0) {
+            current = -1;
+            removeHighlights();
+        } else {
+            Highlighter.Highlight hh = highlighter.getHighlights()[0];
+            highlighter.removeHighlight(hh);
+            try {
+                highlighter.addHighlight(hh.getStartOffset(), hh.getEndOffset(), currentPainter);
+            } catch (BadLocationException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    public void removeHighlights() {
+        highlighter.removeAllHighlights();
+    }
+
+    public Highlighter getHighlighter() {
+        return this.highlighter;
+    }
+
 }

@@ -1,9 +1,9 @@
 package com.Itsu.Comet.editor;
 
-import java.awt.Color;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.swing.JTextPane;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
@@ -19,10 +19,10 @@ import com.Itsu.Comet.core.Controller;
 public class JavaSyntaxHighliter extends DefaultStyledDocument implements SyntaxHighliter{
     private static final char LB = '\n';
     private static final String OPERANDS = ".,(){;";
-    private static Color O;;
 
     private MutableAttributeSet keyword;
     private MutableAttributeSet text;
+    private MutableAttributeSet annotation;
     private MutableAttributeSet comment;
     private MutableAttributeSet oneLineCom;
     private MutableAttributeSet multiLineCom;
@@ -33,15 +33,18 @@ public class JavaSyntaxHighliter extends DefaultStyledDocument implements Syntax
     private boolean multi = false;
     private int multiOff = 0;
 
+    private JTextPane pane;
+
     public JavaSyntaxHighliter() {
         super();
-        
-        O = Controller.getJavaColors().get("annotation");
 
         //System token
         keyword = new SimpleAttributeSet();
         StyleConstants.setForeground(keyword, Controller.getJavaColors().get("keyword"));
         StyleConstants.setBold(keyword, true);
+
+        annotation = new SimpleAttributeSet();
+        StyleConstants.setForeground(annotation, Controller.getJavaColors().get("annotation"));
 
         //"return" token
         returnToken = new SimpleAttributeSet();
@@ -128,6 +131,7 @@ public class JavaSyntaxHighliter extends DefaultStyledDocument implements Syntax
 
         //utils:
         //StyleConstants.setForeground(addStyle("//TODO",  def), O);
+        /*
         StyleConstants.setForeground(addStyle("@param",  nomal), O);
         StyleConstants.setForeground(addStyle("@author",  nomal), O);
         StyleConstants.setForeground(addStyle("@description",  nomal), O);
@@ -138,7 +142,9 @@ public class JavaSyntaxHighliter extends DefaultStyledDocument implements Syntax
         StyleConstants.setForeground(addStyle("@code",  nomal), O);
         StyleConstants.setForeground(addStyle("@deprecated",  nomal), O);
         StyleConstants.setForeground(addStyle("@return",  nomal), O);
+        */
     }
+
     @Override public void insertString(int offset, String text, AttributeSet a) throws BadLocationException {
         // @see PlainDocument#insertString(...)
         int length = 0;
@@ -151,10 +157,12 @@ public class JavaSyntaxHighliter extends DefaultStyledDocument implements Syntax
         super.insertString(offset, str, a);
         processChangedLines(offset, length);
     }
+
     @Override public void remove(int offset, int length) throws BadLocationException {
         super.remove(offset, length);
         processChangedLines(offset, 0);
     }
+
     private void processChangedLines(int offset, int length) throws BadLocationException {
         Element root = getDefaultRootElement();
         String content = getText(0, getLength());
@@ -168,6 +176,7 @@ public class JavaSyntaxHighliter extends DefaultStyledDocument implements Syntax
             applyHighlighting(content, i);
         }
     }
+
     private void applyHighlighting(String content, int line) throws BadLocationException {
         Element root = getDefaultRootElement();
         int startOffset   = root.getElement(line).getStartOffset();
@@ -197,6 +206,7 @@ public class JavaSyntaxHighliter extends DefaultStyledDocument implements Syntax
         setCharacterAttributes(startOffset, lineLength, text, true);
         checkForTokens(content, startOffset, endOffset);
     }
+
     private void checkForTokens(String content, int startOffset, int endOffset) {
         int index = startOffset;
         while (index <= endOffset) {
@@ -210,6 +220,7 @@ public class JavaSyntaxHighliter extends DefaultStyledDocument implements Syntax
             index = getOtherToken(content, index, endOffset);
         }
     }
+
     private int getOtherToken(String content, int startOffset, int endOffset) {
         int endOfToken = startOffset + 1;
         while (endOfToken <= endOffset) {
@@ -223,15 +234,30 @@ public class JavaSyntaxHighliter extends DefaultStyledDocument implements Syntax
         //    setCharacterAttributes(startOffset, endOfToken - startOffset, keywords.get(token), false);
         if(token.equals("return")){
             setCharacterAttributes(startOffset, endOfToken - startOffset, returnToken, false);
+
+        }else if (isAnnotation(token)) {
+            setCharacterAttributes(startOffset, endOfToken - startOffset, annotation, false);
+
         }else if (isKeyword(token)) {
             setCharacterAttributes(startOffset, endOfToken - startOffset, keyword, false);
         }
+
         return endOfToken + 1;
     }
+
     protected boolean isDelimiter(String character) {
         return Character.isWhitespace(character.charAt(0)) || OPERANDS.indexOf(character) != -1;
     }
+
     public boolean isKeyword(String token){
         return keywords.contains(token);
+    }
+
+    public boolean isAnnotation(String token){
+        return token.startsWith("@");
+    }
+
+    public boolean isTab(String token) {
+        return token.equals("\t");
     }
 }

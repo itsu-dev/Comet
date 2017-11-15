@@ -1,5 +1,6 @@
 C:\Users\itsu0\OneDrive\ドキュメント\GitHub\Comet\src\main\java\com\Itsu\Comet\utils\BackgroundTask.java
 C:\Users\itsu0\OneDrive\ドキュメント\GitHub\Comet\src\main\java\com\Itsu\Comet\core\Controller.java
+C:\Users\itsu0\OneDrive\ドキュメント\GitHub\Comet\src\main\java\com\Itsu\Comet\listener\HighlightListener.java
 C:\Users\itsu0\OneDrive\ドキュメント\GitHub\Comet\src\main\java\com\Itsu\Comet\gui\Editor.java
 C:\Users\itsu0\OneDrive\ドキュメント\GitHub\Comet\src\main\java\com\Itsu\Comet\gui\ProjectSetter.java
 C:\Users\itsu0\OneDrive\ドキュメント\GitHub\Comet\src\main\java\com\Itsu\Comet\project\ProjectMaker.java
@@ -15,6 +16,7 @@ C:\Users\itsu0\OneDrive\ドキュメント\GitHub\Comet\src\main\java\com\Itsu\C
 C:\Users\itsu0\OneDrive\ドキュメント\GitHub\Comet\src\main\java\com\Itsu\Comet\listener\FolderSelectionListener.java
 C:\Users\itsu0\OneDrive\ドキュメント\GitHub\Comet\src\main\java\com\Itsu\Comet\utils\Utils.java
 C:\Users\itsu0\OneDrive\ドキュメント\GitHub\Comet\src\main\java\com\Itsu\Comet\gui\NukkitTest.java
+C:\Users\itsu0\OneDrive\ドキュメント\GitHub\Comet\src\main\java\com\Itsu\Comet\gui\TextPaneListener.java
 C:\Users\itsu0\OneDrive\ドキュメント\GitHub\Comet\src\main\java\com\Itsu\Comet\utils\EditorFont.java
 C:\Users\itsu0\OneDrive\ドキュメント\GitHub\Comet\src\main\java\com\Itsu\Comet\gui\ProjectPopupMenu.java
 C:\Users\itsu0\OneDrive\ドキュメント\GitHub\Comet\src\main\java\com\Itsu\Comet\utils\Data.java
@@ -36,4 +38,5 @@ C:\Users\itsu0\OneDrive\ドキュメント\GitHub\Comet\src\main\java\com\Itsu\C
 C:\Users\itsu0\OneDrive\ドキュメント\GitHub\Comet\src\main\java\com\Itsu\Comet\editor\JavaSyntaxHighliter.java
 C:\Users\itsu0\OneDrive\ドキュメント\GitHub\Comet\src\main\java\com\Itsu\Comet\project\ProjectManager.java
 C:\Users\itsu0\OneDrive\ドキュメント\GitHub\Comet\src\main\java\com\Itsu\Comet\gui\EditorPanel.java
+C:\Users\itsu0\OneDrive\ドキュメント\GitHub\Comet\src\main\java\com\Itsu\Comet\gui\TextPanePopup.java
 C:\Users\itsu0\OneDrive\ドキュメント\GitHub\Comet\src\main\java\com\Itsu\Comet\utils\PropertyReader.java
