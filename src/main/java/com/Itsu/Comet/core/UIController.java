@@ -24,8 +24,6 @@ public class UIController {
         UIManager.put("MenuItem.selectionForeground", Controller.getColors().get("EDITOR_TEXT"));
         UIManager.put("MenuItem.preferredSize", new Dimension(300, 30));
         UIManager.put("MenuItem.font", new Font(Controller.getDataObject().getSystemFont(), Font.PLAIN, 12));
-        UIManager.put("Label.font", new Font(Controller.getDataObject().getSystemFont(), Font.PLAIN, 12));
-        UIManager.put("CheckBox.font", new Font(Controller.getDataObject().getSystemFont(), Font.PLAIN, 12));
         UIManager.put("Button.font", new Font(Controller.getDataObject().getSystemFont(), Font.PLAIN, 12));
         UIManager.put("Button.focus", Controller.getColors().get(1));
         UIManager.put("Button.background", Controller.getColors().get(1));
@@ -55,7 +53,15 @@ public class UIController {
         UIManager.put("InternalFrame.maximizeIcon", data.getMaxIcon());
         UIManager.put("InternalFrame.minimizeIcon", data.getMinIcon());
         UIManager.put("InternalFrame.iconifyIcon", data.getIconFlyIcon());
+        UIManager.put("List.background", Controller.getColors().get("MENU_BAR"));
+        UIManager.put("List.foreground", Controller.getColors().get("EDITOR_TEXT"));
+        UIManager.put("List.selectionBackground", Controller.getColors().get("MENU_BAR_SELECT"));
+        UIManager.put("List.selectionForeground", Controller.getColors().get("EDITOR_TEXT"));
+        UIManager.put("List.focusCellHighlightBorder", Controller.getColors().get("MENU_BAR_SELECT"));
+        UIManager.put("List.font", new Font(Controller.getDataObject().getSystemFont(), Font.PLAIN, 12));
         UIManager.put("Separator.foreground", Color.LIGHT_GRAY);
+        UIManager.put("Label.font", new Font(Controller.getDataObject().getSystemFont(), Font.PLAIN, 12));
+        UIManager.put("CheckBox.font", new Font(Controller.getDataObject().getSystemFont(), Font.PLAIN, 12));
 	}
 
 }

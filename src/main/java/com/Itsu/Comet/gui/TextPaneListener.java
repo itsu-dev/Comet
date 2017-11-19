@@ -14,6 +14,8 @@ public class TextPaneListener implements MouseListener {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		
+		pane.setAutoGUIVisible(false);
+		
 		if(e.getClickCount() == 1) {
 			
 			if(pane.getHighlighter() != null) {

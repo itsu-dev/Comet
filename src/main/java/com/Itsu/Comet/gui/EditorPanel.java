@@ -3,6 +3,7 @@ package com.Itsu.Comet.gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Objects;
@@ -38,6 +39,8 @@ public class EditorPanel extends JScrollPane{
 
     private int current;
 
+    private AutoGUI autoGUI;
+
     private Highlighter highlighter;
 
     private IndentAction ia = new IndentAction();
@@ -67,6 +70,7 @@ public class EditorPanel extends JScrollPane{
         }
 
         view = new LineNumberView(jp);
+        autoGUI = new AutoGUI(this);
 
         jp.setPreferredSize(this.getMaximumSize());
         jp.setBackground(Controller.getColors().get("EDITOR"));
@@ -91,28 +95,18 @@ public class EditorPanel extends JScrollPane{
                         insert = insert.replaceAll("null", "");
                         jp.replaceSelection(insert);
 
-                }
-                /*else if(e.getKeyCode() == KeyEvent.VK_PERIOD){
+                } else if(e.getKeyCode() == KeyEvent.VK_PERIOD){
                     if(period){
-                        Document doc = jp.getDocument();
-                        Element root = doc.getDefaultRootElement();
-                        int caret = root.getElementIndex(jp.getCaretPosition()) + 1;
+                        Point point = jp.getCaret().getMagicCaretPosition();
 
-                        caret = Math.max(1, Math.min(root.getElementCount(), caret));
-                        try {
-                          Element elem = root.getElement(caret - 1);
-                          Rectangle rect = jp.modelToView(elem.getStartOffset());
+                        autoGUI.setLocation(Controller.getEditor().getX() + 50 + point.x, Controller.getEditor().getY() + 133 + point.y);
+                        autoGUI.setOffset(jp.getCaretPosition());
+                        autoGUI.setVisible(true);
 
-                          System.out.println(rect.width + "::" + rect.height + "::" + rect.x + "::" + rect.y);
-
-                          new AutoGUI(rect.width, rect.height);
-
-                        } catch (BadLocationException ex) {
-                        }
                     }else{
                         period = true;
                     }
-                }*/
+                }
             }
                 public void keyReleased(KeyEvent e){}
                 public void keyTyped(KeyEvent e){}
@@ -160,7 +154,7 @@ public class EditorPanel extends JScrollPane{
     public void changeHighlight() {
         highlighter = jp.getHighlighter();
         highlighter.removeAllHighlights();
-        
+
         Document doc = jp.getDocument();
         getPattern().ifPresent(pattern -> {
             try {
@@ -199,6 +193,14 @@ public class EditorPanel extends JScrollPane{
 
     public Highlighter getHighlighter() {
         return this.highlighter;
+    }
+
+    public void setAutoGUIVisible(boolean b) {
+        if(this.autoGUI != null) this.autoGUI.setVisible(b);
+    }
+
+    public JTextPane getEditor() {
+        return this.jp;
     }
 
 }
