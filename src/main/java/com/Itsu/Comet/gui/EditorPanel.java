@@ -102,6 +102,7 @@ public class EditorPanel extends JScrollPane{
 
                         autoGUI.setLocation(Controller.getEditor().getX() + 50 + point.x, Controller.getEditor().getY() + 133 + point.y);
                         autoGUI.setOffset(jp.getCaretPosition());
+                        autoGUI.setListData(Controller.autoComplete(Controller.class));
                         autoGUI.setVisible(true);
 
                     }else{

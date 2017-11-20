@@ -10,8 +10,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeCellRenderer;
 
 import com.Itsu.Comet.core.Controller;
-import com.Itsu.Comet.editor.JavaSyntaxHighliter;
 import com.Itsu.Comet.editor.PHPSyntaxHighliter;
+import com.Itsu.Comet.editor.Java.JavaSyntaxHighliter;
 import com.Itsu.Comet.gui.EditorPanel;
 import com.Itsu.Comet.gui.ImagePanel;
 import com.Itsu.Comet.utils.PropertyReader;

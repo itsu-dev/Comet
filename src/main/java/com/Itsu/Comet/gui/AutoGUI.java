@@ -2,6 +2,7 @@ package com.Itsu.Comet.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -31,7 +32,7 @@ public class AutoGUI extends JFrame {
         this.setTitle("Comet AutoComplete");
         this.setResizable(true);
         this.setBackground(Controller.getColors().get(5));
-        this.setSize(200, 300);
+        this.setSize(300, 400);
         this.setLayout(new BorderLayout());
         this.setAlwaysOnTop(true);
 
@@ -44,12 +45,11 @@ public class AutoGUI extends JFrame {
         panel.setBackground(Controller.getColors().get(5));
         panel.setBorder(new LineBorder(Controller.getColors().get(4)));
 
-        String data[] = {"add", "addBar", "addComponent", "addListener", "addScrollBar", "back", "cross", "dimension", "fall", "getBar", "getComponent", "getComponents", "getDimension", "getWidth", "getX"};
-        list = new JList<>(data);
+        list = new JList<>();
         list.addMouseListener(new ListListener(this));
         scroll = new JScrollPane(list);
 
-        scroll.setPreferredSize(new Dimension(200, 300));
+        scroll.setPreferredSize(new Dimension(300, 400));
         scroll.getVerticalScrollBar().setUI(new BlackScrollBarUI());
         scroll.getHorizontalScrollBar().setUI(new BlackScrollBarUI());
 
@@ -72,6 +72,10 @@ public class AutoGUI extends JFrame {
 
     public int getOffset() {
         return this.offset;
+    }
+
+    public void setListData(List<String> list) {
+        this.list.setListData((String[]) list.toArray(new String[0]));
     }
 
 }

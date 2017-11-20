@@ -1,4 +1,4 @@
-package com.Itsu.Comet.editor;
+package com.Itsu.Comet.editor.Java;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +15,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 
 import com.Itsu.Comet.core.Controller;
+import com.Itsu.Comet.editor.SyntaxHighliter;
 
 public class JavaSyntaxHighliter extends DefaultStyledDocument implements SyntaxHighliter{
     private static final char LB = '\n';

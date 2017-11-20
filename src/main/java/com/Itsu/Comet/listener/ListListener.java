@@ -5,6 +5,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.text.BadLocationException;
 
+import com.Itsu.Comet.core.Controller;
 import com.Itsu.Comet.gui.AutoGUI;
 
 public class ListListener implements MouseListener {
@@ -18,7 +19,7 @@ public class ListListener implements MouseListener {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if(e.getClickCount() == 2) {
-			String src = (String) gui.getList().getSelectedValue();
+			String src = Controller.getToken((String) gui.getList().getSelectedValue());
 			try {
 				gui.getEditorPanel().getEditor().getDocument().insertString(gui.getOffset() + 1, src, null);
 				gui.setVisible(false);

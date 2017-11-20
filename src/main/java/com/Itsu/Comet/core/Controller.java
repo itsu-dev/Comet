@@ -6,12 +6,14 @@ import java.awt.Graphics;
 import java.awt.SplashScreen;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 
+import com.Itsu.Comet.editor.Java.AutoComplete;
 import com.Itsu.Comet.gui.Editor;
 import com.Itsu.Comet.gui.NukkitTest;
 import com.Itsu.Comet.gui.ProjectSetter;
@@ -29,6 +31,7 @@ public class Controller {
 
     private static Data data = new Data();
     private static Colors color = new Colors();
+    private static AutoComplete<Object> complete = new AutoComplete<>();
 
     public Controller(){
 
@@ -260,6 +263,32 @@ public class Controller {
 
     public static void error(String message){
         MessagePopup.error(message);
+    }
+
+    public static <T> List<String> autoComplete(Class<? extends T> clazz) {
+        return complete.autoComplete(clazz);
+    }
+
+    public static Map<String, String> getMethods() {
+        return complete.getMethods();
+    }
+
+    public static Map<String, String> getFields() {
+        return complete.getFields();
+    }
+
+    public static String getToken(String key) {
+
+        if(getFields().containsKey(key)) {
+            return getFields().get(key);
+
+        } else if(getMethods().containsKey(key)) {
+            return getMethods().get(key);
+
+        } else {
+            return null;
+        }
+
     }
 
 }
