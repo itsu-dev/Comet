@@ -15,7 +15,7 @@ public class AutoComplete<T> {
     private Method[] methods;
     private Field[] fields;
 
-    private Map<String, String> names;
+    private Map<String, String> mNames;
     private Map<String, String> fNames;
 
     private List<String> methodNames;
@@ -33,7 +33,7 @@ public class AutoComplete<T> {
         methods = classData.getMethods();
         fields = classData.getFields();
 
-        names = new HashMap<>();
+        mNames = new HashMap<>();
         fNames = new HashMap<>();
 
         methodNames = new ArrayList<>();
@@ -58,7 +58,7 @@ public class AutoComplete<T> {
             sb.append(" : ");
             sb.append(method.getReturnType().getSimpleName());
 
-            names.put(sb.toString(), method.getName());
+            mNames.put(sb.toString(), method.getName());
         }
 
         for(Field field : fields) {
@@ -70,7 +70,7 @@ public class AutoComplete<T> {
             fNames.put(sb.toString(), field.getName());
         }
 
-        for(String str : names.keySet()) {
+        for(String str : mNames.keySet()) {
             methodNames.add(str);
         }
 
@@ -93,7 +93,7 @@ public class AutoComplete<T> {
     }
 
     public Map<String, String> getMethods() {
-        return this.names;
+        return this.mNames;
     }
 
     public Map<String, String> getFields() {
