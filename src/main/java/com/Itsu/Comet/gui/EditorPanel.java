@@ -29,6 +29,7 @@ import com.Itsu.Comet.editor.IndentAction;
 import com.Itsu.Comet.editor.LineNumberView;
 import com.Itsu.Comet.editor.SyntaxHighliter;
 import com.Itsu.Comet.listener.HighlightListener;
+import com.Itsu.Comet.listener.TextPaneListener;
 import com.Itsu.Comet.ui.BlackScrollBarUI;
 import com.Itsu.Comet.utils.EditorFont;
 
@@ -79,7 +80,7 @@ public class EditorPanel extends JScrollPane{
         jp.setSelectionColor(new Color(25,118,210));
         jp.setSelectedTextColor(Color.WHITE);
         jp.setFont(new Font(new EditorFont().createEditorFont().getName(), Font.PLAIN, 14));
-        jp.setComponentPopupMenu(new TextPanePopup());
+        jp.setComponentPopupMenu(new TextPanePopup(this));
         jp.addMouseListener(new TextPaneListener(this));
         jp.getDocument().addDocumentListener(new HighlightListener(this));
         jp.addKeyListener(new KeyListener(){
@@ -106,6 +107,7 @@ public class EditorPanel extends JScrollPane{
                     }else{
                         period = true;
                     }
+                    
                 }
             }
                 public void keyReleased(KeyEvent e){}

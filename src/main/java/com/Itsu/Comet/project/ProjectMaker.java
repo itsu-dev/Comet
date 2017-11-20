@@ -3,6 +3,7 @@ package com.Itsu.Comet.project;
 import java.io.File;
 import java.io.IOException;
 
+import com.Itsu.Comet.core.Controller;
 import com.Itsu.Comet.utils.Utils;
 
 public class ProjectMaker {
@@ -28,7 +29,7 @@ public class ProjectMaker {
 					resource.mkdirs();
 				}
 				
-				Utils.writeFile(new File(workspace + name + "/project.proj"), "name=" + name + ";type=" + type);
+				Utils.writeFile(new File(workspace + name + "/project.proj"), "name=" + name + ";type=" + type + ";path" + Controller.getDataObject().getWorkspacePass() + name);
 				
 				
 			} catch (IOException e) {
@@ -54,11 +55,11 @@ public class ProjectMaker {
 					resource.mkdirs();
 				}
 				
-				Utils.writeFile(new File(workspace + name + "/Project.proj"), "name=" + name + "\ntype=Java");
+				Utils.writeFile(new File(workspace + name + "/project.proj"), "name=" + name + "\ntype=Java" + ";path" + Controller.getDataObject().getWorkspacePass() + name);
 				
 				
 			} catch (IOException e) {
-				e.printStackTrace();
+				Controller.exception("プロジェクトの作成中にエラーが発生しました。", e);
 				return false;
 			}
 			

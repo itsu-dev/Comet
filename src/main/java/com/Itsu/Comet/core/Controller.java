@@ -17,6 +17,7 @@ import com.Itsu.Comet.gui.NukkitTest;
 import com.Itsu.Comet.gui.ProjectSetter;
 import com.Itsu.Comet.gui.ProjectTab;
 import com.Itsu.Comet.gui.View;
+import com.Itsu.Comet.project.ProjectFile;
 import com.Itsu.Comet.project.ProjectMaker;
 import com.Itsu.Comet.project.ProjectManager;
 import com.Itsu.Comet.utils.Colors;
@@ -133,9 +134,33 @@ public class Controller {
     public static String getNowProjectPath(){
         return Server.getNowProjectPath();
     }
-    
+
+    public static void setOpenFiles(ProjectFile proj) {
+        Server.setOpenFiles(proj);
+    }
+
+    public static void removeOpenFiles(ProjectFile proj) {
+        Server.removeOpenFiles(proj);
+    }
+
+    public static boolean isOpenedFile(ProjectFile proj) {
+        return Server.isOpenedFile(proj);
+    }
+
+    public static ProjectFile getProjectFileByPath(String path) {
+        return Server.getProjectFileByPath(path);
+    }
+
+    public static ProjectFile getProjectFileByName(String name) {
+        return Server.getProjectFileByName(name);
+    }
+
+    public static ProjectFile getProjectFileByIndex(int index) {
+        return Server.getProjectFileByIndex(index);
+    }
+
     public static ImageIcon getIcon(String filename) {
-    	return Utils.getIcon(filename);
+        return Utils.getIcon(filename);
     }
 
     public static void newWindow(){
@@ -166,11 +191,11 @@ public class Controller {
     public static void initSkinColor(){
         color.initSkinColor("BLACK");
     }
-    
+
     public static void initJavaColor(){
         color.initJavaColor("BLACK");
     }
-    
+
     public static void initPHPColor(){
         color.initPHPColor("BLACK");
     }
@@ -178,11 +203,11 @@ public class Controller {
     public static Map<String, Color> getColors(){
         return color.getColors();
     }
-    
+
     public static Map<String, Color> getJavaColors(){
         return color.getJavaColors();
     }
-    
+
     public static Map<String, Color> getPHPColors(){
         return color.getPHPColors();
     }
@@ -227,6 +252,10 @@ public class Controller {
 
     public static void alert(String message){
         MessagePopup.alert(message);
+    }
+
+    public static void exception(String message, Exception e){
+        MessagePopup.exception(message, e);
     }
 
     public static void error(String message){

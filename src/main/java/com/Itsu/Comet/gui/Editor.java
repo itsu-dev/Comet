@@ -1,22 +1,22 @@
 package com.Itsu.Comet.gui;
 
 import java.awt.BorderLayout;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import com.Itsu.Comet.core.Controller;
+import com.Itsu.Comet.project.ProjectFile;
 import com.Itsu.Comet.ui.SimpleTabbedPaneUI;
+import com.Itsu.Comet.utils.Version;
 
 public class Editor extends View{
 
     private SimpleTabbedPane tab;
     private int w;
     private int h;
-
-    private List<String> tabs = new ArrayList<String>();
 
     public Editor(){
         super("エディタ");
@@ -37,55 +37,46 @@ public class Editor extends View{
     private void createGui(){
         tab = new SimpleTabbedPane();
         tab.setUI(new SimpleTabbedPaneUI());
-        /*
         tab.addChangeListener(new ChangeListener(){
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				try{
-					int i = 0;
 					
-					for(String str : tabs){
-						if(str.endsWith(tab.getTitleAt(tab.getSelectedIndex()))){
-							break;
-						}
-						i++;
+					ProjectFile proj = Controller.getProjectFileByIndex(tab.getSelectedIndex());
+					
+					if(proj == null) {
+			            Controller.getJFrame().setTitle("Comet " + Version.VERSION);
+						return;
 					}
 					
-					System.out.println(i);
-					String temp[] = tabs.get(i).replaceAll("\\\\", "/").split("/");
-					
-					String projectName = null;
-					int count = 0;
-					
-					for(String str : temp){
-						if(str.equals("workspace")){
-							projectName = temp[count + 1];
-							break;
-						}
-						count++;
-					}
+					String projectName = proj.getName();
+					String projectFilePath = proj.getPath();
 					
 					Controller.setNowProject(projectName);
-		            Controller.getJFrame().setTitle("Comet " + Version.VERSION + " - " + Controller.getNowProjectPath());
+					Controller.setNowProjectPath(projectFilePath);
+		            Controller.getJFrame().setTitle("Comet " + Version.VERSION + " - " + projectFilePath);
 					
-					System.out.println(projectName);
+					System.out.println(projectFilePath);
+					
 				}catch(ArrayIndexOutOfBoundsException ex){
 					return;
 				}
 			}
         });
-        */
 
         this.add(tab, BorderLayout.CENTER);
     }
 
     public void addTab(String title, String path, JComponent comp){
-    	if(tabs.contains(path)){
+    	try{
+	    	if(!Controller.isOpenedFile(Controller.getProjectFileByPath(path))){
+	    		return;
+	    	}else{
+		        this.tab.addTab(title, comp);
+		        return;
+	    	}
+    	}catch(NullPointerException e) {
     		return;
-    	}else{
-	        this.tab.addTab(title, comp);
-	        tabs.add(path);
-	        return;
     	}
     }
 

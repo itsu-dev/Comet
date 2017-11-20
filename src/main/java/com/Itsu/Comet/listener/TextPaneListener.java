@@ -1,7 +1,9 @@
-package com.Itsu.Comet.gui;
+package com.Itsu.Comet.listener;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import com.Itsu.Comet.gui.EditorPanel;
 
 public class TextPaneListener implements MouseListener {
 	

@@ -14,15 +14,19 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import com.Itsu.Comet.core.Controller;
+import com.Itsu.Comet.project.ProjectFile;
 
 public class SimpleTabbedPane extends JTabbedPane {
+	
+	private JTabbedPane tabbedPane;
 
-      public SimpleTabbedPane() {
+    public SimpleTabbedPane() {
         super();
-      }
+        tabbedPane = this;
+    }
 
-      @Override
-      public void addTab(String title, final Component content) {
+    @Override
+    public void addTab(String title, final Component content) {
         JPanel tab = new JPanel(new BorderLayout());
         tab.setOpaque(false);
 
@@ -38,7 +42,14 @@ public class SimpleTabbedPane extends JTabbedPane {
 
             @Override
             public void mousePressed(MouseEvent e) {
+                
+				ProjectFile proj = Controller.getProjectFileByPath(Controller.getNowProjectPath());
+				
+				if(proj == null) return;
+				
+                Controller.removeOpenFiles(proj);
                 removeTabAt(indexOfComponent(content));
+	            
             }
 
             @Override
@@ -68,5 +79,5 @@ public class SimpleTabbedPane extends JTabbedPane {
         super.addTab(null, content);
 
         setTabComponentAt(getTabCount() - 1, tab);
-      }
+    }
 }

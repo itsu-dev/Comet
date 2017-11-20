@@ -36,9 +36,11 @@ public class ProjectManager {
             Controller.setNowProjectPath(path);
 
             if(name.toLowerCase().endsWith(".java")){
+            	Controller.setOpenFiles(new ProjectFile(name, path, "java"));
                 Controller.getEditor().addTab(name, path, new EditorPanel(new JavaSyntaxHighliter(), texts));
 
             }else if(name.toLowerCase().endsWith(".php")){
+            	Controller.setOpenFiles(new ProjectFile(name, path, "php"));
                 Controller.getEditor().addTab(name, path, new EditorPanel(new PHPSyntaxHighliter(), texts));
                 
             }else if(name.toLowerCase().endsWith(".png")
@@ -53,10 +55,13 @@ public class ProjectManager {
         			|| name.toLowerCase().endsWith(".epsf")
         			|| name.toLowerCase().endsWith(".icns")
         			|| name.toLowerCase().endsWith(".pict")){
+            	Controller.setOpenFiles(new ProjectFile(name, path, "image"));
             	Controller.getEditor().addTab(name, path, new ImagePanel(ImageIO.read(file)));
         		
             }else{
+            	Controller.setOpenFiles(new ProjectFile(name, path, "other"));
                 Controller.getEditor().addTab(name, path, new EditorPanel(null, texts));
+                
             }
             
             //Controller.getJFrame().setTitle("Comet " + Version.VERSION + " - " + path);
