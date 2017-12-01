@@ -6,6 +6,18 @@ import java.io.IOException;
 import com.Itsu.Comet.core.Controller;
 import com.Itsu.Comet.utils.Utils;
 
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * @author Itsu
+ *
+ */
+
 public class ProjectMaker {
 	
 	public ProjectMaker(){

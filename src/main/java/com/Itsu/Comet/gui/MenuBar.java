@@ -10,6 +10,18 @@ import javax.swing.JMenuItem;
 
 import com.Itsu.Comet.core.Controller;
 
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * @author Itsu
+ *
+ */
+
 public class MenuBar extends JMenuBar implements ActionListener{
 
     private JMenu file;

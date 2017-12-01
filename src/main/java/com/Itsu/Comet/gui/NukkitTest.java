@@ -11,15 +11,27 @@ import javax.swing.JTextField;
 
 import com.Itsu.Comet.core.Controller;
 
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * @author Itsu
+ *
+ */
+
 public class NukkitTest {
 
-    private static JDialog frame = new JDialog();
+    private JDialog frame = new JDialog();
 
     public NukkitTest(){
-
+    	showWindow();
     }
 
-    private static void init(){
+    private void init(){
         JPanel panel = new JPanel();
         panel.setLayout(null);
         panel.setBackground(Color.WHITE);
@@ -27,7 +39,6 @@ public class NukkitTest {
         JLabel l1 = new JLabel("サーバーソフト");
         JTextField soft = new JTextField();
         JButton search = new JButton("参照");
-        
         JButton start = new JButton("起動");
 
         l1.setBounds(10, 10, 200, 20);
@@ -47,7 +58,7 @@ public class NukkitTest {
         frame.add(panel, BorderLayout.CENTER);
     }
 
-    public static void showWindow(){
+    public void showWindow(){
         frame.setTitle("Nukkit テスト - " + Controller.getNowProject());
         frame.setSize(600, 130);
         frame.setLocationRelativeTo(null);

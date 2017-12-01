@@ -15,6 +15,18 @@ import javax.swing.border.LineBorder;
 
 import com.Itsu.Comet.ui.BlackScrollBarUI;
 
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * @author Itsu
+ *
+ */
+
 public class MessagePopup {
 
     public MessagePopup(){
@@ -22,10 +34,12 @@ public class MessagePopup {
     }
 
     public static void information(String message){
+    	Toolkit.getDefaultToolkit().beep();
         JOptionPane.showMessageDialog(new JFrame(), message, "情報", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public static void alert(String message){
+    	Toolkit.getDefaultToolkit().beep();
         JOptionPane.showMessageDialog(new JFrame(), message, "警告", JOptionPane.WARNING_MESSAGE);
     }
 
@@ -64,6 +78,7 @@ public class MessagePopup {
     }
 
     public static void error(String message) {
+    	Toolkit.getDefaultToolkit().beep();
         JOptionPane.showMessageDialog(new JFrame(), message, "エラー", JOptionPane.ERROR_MESSAGE);
     }
 

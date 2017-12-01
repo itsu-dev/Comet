@@ -17,6 +17,18 @@ import javax.swing.JPopupMenu;
 import com.Itsu.Comet.core.Controller;
 import com.Itsu.Comet.gui.View;
 
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * @author Itsu
+ *
+ */
+
 public class DragWindowListener extends MouseAdapter implements ActionListener{
 	  private final transient Point startPt = new Point();
 	  private JPopupMenu pop;

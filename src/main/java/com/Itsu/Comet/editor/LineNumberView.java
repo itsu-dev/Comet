@@ -21,6 +21,18 @@ import javax.swing.text.Element;
 
 import com.Itsu.Comet.core.Controller;
 
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * @author Itsu
+ *
+ */
+
 public class LineNumberView extends JComponent {
     private static final int MARGIN = 5;
     private final JTextPane textArea;

@@ -11,6 +11,18 @@ import com.Itsu.Comet.gui.ProjectTab;
 import com.Itsu.Comet.gui.View;
 import com.Itsu.Comet.project.ProjectFile;
 
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * @author Itsu
+ *
+ */
+
 public class Server{
 
     private static List<View> activeWindows = new ArrayList<>();

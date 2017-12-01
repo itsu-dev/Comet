@@ -7,6 +7,23 @@
 
 package com.Itsu.Comet.ui;
 
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * This ui is made by:
+ * http://ui-ideas.blogspot.jp/2012/06/mac-os-x-mountain-lion-scrollbars-in.html
+ * 
+ * Forked by Itsu
+ * 
+ * @author Itsu
+ *
+ */
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;

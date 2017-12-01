@@ -14,6 +14,18 @@ import com.Itsu.Comet.core.Controller;
 import com.Itsu.Comet.listener.ListListener;
 import com.Itsu.Comet.ui.BlackScrollBarUI;
 
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * @author Itsu
+ *
+ */
+
 public class AutoGUI extends JFrame {
 
     private JPanel panel;

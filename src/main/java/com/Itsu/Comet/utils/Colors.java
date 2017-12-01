@@ -5,6 +5,18 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * @author Itsu
+ *
+ */
+
 public class Colors {
 
     private Map<String, Color> color = new HashMap<>();
@@ -240,7 +252,6 @@ public class Colors {
 
             String data = Utils.readFile(this.getClass().getClassLoader().getResourceAsStream("Comet/datas/Colors.properties"));
             String colors[] = data.split("\n");
-            int i = 1;
 
             for(String src : colors) {
                 String temp[];

@@ -18,6 +18,18 @@ import javax.swing.event.ChangeListener;
 
 import com.Itsu.Comet.core.Controller;
 
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * @author Itsu
+ *
+ */
+
 public class ProjectSetter extends JFrame{
 	
 	private static JDialog frame = new JDialog();

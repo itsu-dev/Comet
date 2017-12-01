@@ -3,12 +3,27 @@ package com.Itsu.Comet.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
+import javax.swing.JFrame;
+
+/*
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+*/
+
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * @author Itsu
+ *
+ */
 
 public class ClassMaker extends JFrame{
 	
@@ -48,6 +63,7 @@ public class ClassMaker extends JFrame{
 	}
 	
 	private void initNukkit(){
+		/*
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBackground(Color.WHITE);
@@ -71,11 +87,14 @@ public class ClassMaker extends JFrame{
 		JTextField events = new JTextField();
 		
 		JButton ok = new JButton("作成");
+		*/
 	}
 	
+	/*
 	private void initJupiter(){
 		
 	}
+	*/
 	
 	private void initJava(){
 		

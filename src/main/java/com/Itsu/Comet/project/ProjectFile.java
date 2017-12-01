@@ -1,5 +1,17 @@
 package com.Itsu.Comet.project;
 
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * @author Itsu
+ *
+ */
+
 public final class ProjectFile {
 
     private String name;
@@ -19,5 +31,8 @@ public final class ProjectFile {
     public String getPath() {
     	return path;
     }
-
+	
+	public String getType() {
+		return type;
+	}
 }

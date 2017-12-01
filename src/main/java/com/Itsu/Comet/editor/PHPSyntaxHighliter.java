@@ -9,11 +9,21 @@ import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.Element;
 import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
-import javax.swing.text.StyleContext;
 
 import com.Itsu.Comet.core.Controller;
+
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * @author Itsu
+ *
+ */
 
 public class PHPSyntaxHighliter extends DefaultStyledDocument implements SyntaxHighliter{
     private static final char LB = '\n';
@@ -31,10 +41,6 @@ public class PHPSyntaxHighliter extends DefaultStyledDocument implements SyntaxH
     private Set<String> keywords;
     private Set<String> keywords1;
     private Set<String> keywords2;
-    private final Style nomal = getStyle(StyleContext.DEFAULT_STYLE);
-
-    private boolean multi = false;
-    private int multiOff = 0;
 
     public PHPSyntaxHighliter() {
         super();

@@ -1,7 +1,6 @@
 package com.Itsu.Comet.ui;
 
 import java.awt.Color;
-import java.awt.ComponentOrientation;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -14,11 +13,23 @@ import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
 import sun.swing.SwingUtilities2;
 
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * @author Itsu
+ *
+ */
+
 public class SimpleTabbedPaneUI extends BasicTabbedPaneUI{
 	
 	private static final int TAB_WIDTH = 100;
 	
-    private static final Color TAB_COLOR = new Color(66, 66, 66);
+    private static final Color TAB_COLOR = new Color(0, 128, 255);//66 66 66
     private static final Color TAB_FRAME_COLOR = new Color(33, 33, 33);
     
     private static final int TAB_BORDER_SIZE = 5;
@@ -27,7 +38,6 @@ public class SimpleTabbedPaneUI extends BasicTabbedPaneUI{
 	@Override
 	public void paintTab(Graphics g, int tabPlacement, Rectangle[] rects, int tabIndex, Rectangle iconRect, Rectangle textRect) {
 		Rectangle tabRect = rects[tabIndex];
-		ComponentOrientation orientation = ComponentOrientation.getOrientation(tabPane.getLocale());
 		
         int x = tabRect.x + TAB_BORDER_SIZE;
         int y = tabRect.y + TAB_BORDER_SIZE;
@@ -57,11 +67,20 @@ public class SimpleTabbedPaneUI extends BasicTabbedPaneUI{
         paintFocusIndicator(g, tabPlacement, rects, tabIndex, iconRect, newTextRect, isSelected);
         
         Graphics2D g2 = (Graphics2D)g;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,  RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setColor(TAB_COLOR);
-        g2.fillRoundRect(x, y, w, h, 10, 10);
-        g2.setColor(TAB_FRAME_COLOR);
-        g2.drawRoundRect(x, y, w, h, 10, 10);
+        
+        if(isSelected) {
+	        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,  RenderingHints.VALUE_ANTIALIAS_ON);
+	        g2.setColor(TAB_COLOR);
+	        g2.fillRect(x, y, w, h);
+	        g2.fillRect(this.tabPane.getX(), y + 22, this.tabPane.getWidth(), 4);
+	        g2.setColor(TAB_FRAME_COLOR);
+        } else {
+        	g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,  RenderingHints.VALUE_ANTIALIAS_ON);
+	        g2.setColor(new Color(66, 66, 66));
+	        g2.fillRect(x, y, w, h - 5);
+	        g2.setColor(TAB_FRAME_COLOR);
+	        g2.drawRect(x, y, w, h);
+        }
         
         paintText(g, tabPlacement, font, metrics, tabIndex, clippedTitle, newTextRect, isSelected);
         paintIcon(g, tabPlacement, tabIndex, icon, iconRect, isSelected);

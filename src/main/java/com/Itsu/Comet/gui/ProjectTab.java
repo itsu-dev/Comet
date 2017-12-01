@@ -15,6 +15,18 @@ import com.Itsu.Comet.listener.FolderSelectionListener;
 import com.Itsu.Comet.ui.BlackScrollBarUI;
 import com.Itsu.Comet.utils.FileTreeCellRenderer;
 
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * @author Itsu
+ *
+ */
+
 public class ProjectTab extends JScrollPane{
 	
 	private FileSystemView fileSystemView = FileSystemView.getFileSystemView();

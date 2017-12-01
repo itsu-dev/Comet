@@ -7,6 +7,18 @@ import javax.swing.JComponent;
 import com.Itsu.Comet.core.Controller;
 import com.Itsu.Comet.ui.SimpleTabbedPaneUI;
 
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * @author Itsu
+ *
+ */
+
 public class Window extends View{
 
     private SimpleTabbedPane tab;
@@ -18,12 +30,9 @@ public class Window extends View{
         super("ビュー・ウィンドウ(1)");
 
         w = (int) Controller.getJFrame().getWidth();
-        h = (int) Controller.getJFrame().getHeight() - 90;
+        h = (int) Controller.getJFrame().getHeight() - 105;
 
-        System.out.println(h);
-
-
-        this.setBackground(Controller.getColors().get("BACKGROUND"));
+        this.setBackground(Controller.getColors().get("EDITOR"));
         this.setBounds(0, 0, (int) (w * 0.2), h);
         this.setView(this);
         this.setViewKey("View1");

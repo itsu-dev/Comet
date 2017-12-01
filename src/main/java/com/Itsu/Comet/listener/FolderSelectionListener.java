@@ -15,6 +15,18 @@ import com.Itsu.Comet.core.Controller;
 import com.Itsu.Comet.project.ProjectManager;
 import com.Itsu.Comet.utils.BackgroundTask;
 
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * @author Itsu
+ *
+ */
+
 public class FolderSelectionListener implements TreeSelectionListener {
 	
  private final FileSystemView fileSystemView;

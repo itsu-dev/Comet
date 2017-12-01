@@ -28,19 +28,32 @@ import com.Itsu.Comet.core.Controller;
 import com.Itsu.Comet.editor.IndentAction;
 import com.Itsu.Comet.editor.LineNumberView;
 import com.Itsu.Comet.editor.SyntaxHighliter;
+import com.Itsu.Comet.editor.Java.JavaParser;
+import com.Itsu.Comet.editor.Java.JavaVariable;
 import com.Itsu.Comet.listener.HighlightListener;
 import com.Itsu.Comet.listener.TextPaneListener;
 import com.Itsu.Comet.ui.BlackScrollBarUI;
 import com.Itsu.Comet.utils.EditorFont;
+
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * @author Itsu
+ *
+ */
 
 public class EditorPanel extends JScrollPane{
 
     private final transient Highlighter.HighlightPainter currentPainter   = new DefaultHighlighter.DefaultHighlightPainter(new Color(56, 250, 46));
     private final transient Highlighter.HighlightPainter highlightPainter = new DefaultHighlighter.DefaultHighlightPainter(new Color(87, 253, 203));
 
-    private int current;
-
     private AutoGUI autoGUI;
+    private JavaParser parser;
 
     private Highlighter highlighter;
 
@@ -72,6 +85,7 @@ public class EditorPanel extends JScrollPane{
 
         view = new LineNumberView(jp);
         autoGUI = new AutoGUI(this);
+        parser = new JavaParser(jp);
 
         jp.setPreferredSize(this.getMaximumSize());
         jp.setBackground(Controller.getColors().get("EDITOR"));
@@ -85,8 +99,8 @@ public class EditorPanel extends JScrollPane{
         jp.getDocument().addDocumentListener(new HighlightListener(this));
         jp.addKeyListener(new KeyListener(){
             public void keyPressed(KeyEvent e){
+
                 String insert = null;
-                String str = null;
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
                     e.consume();
                     for(int i=0; i<ia.getTabSize(jp); i++){
@@ -98,17 +112,40 @@ public class EditorPanel extends JScrollPane{
 
                 } else if(e.getKeyCode() == KeyEvent.VK_PERIOD){
                     if(period){
-                        Point point = jp.getCaret().getMagicCaretPosition();
+                        try{
+                            Point point = jp.getCaret().getMagicCaretPosition();
 
-                        autoGUI.setLocation(Controller.getEditor().getX() + 50 + point.x, Controller.getEditor().getY() + 133 + point.y);
-                        autoGUI.setOffset(jp.getCaretPosition());
-                        autoGUI.setListData(Controller.autoComplete(Controller.class));
-                        autoGUI.setVisible(true);
+                            parse();
+
+                            autoGUI.setLocation(Controller.getEditor().getX() + 50 + point.x, Controller.getEditor().getY() + 133 + point.y);
+                            autoGUI.setOffset(jp.getCaretPosition());
+
+                            String target = "";
+                            int pos = jp.getCaretPosition() - 1;
+
+                            for(int i = pos;i > 0;i--) {
+                                String str = jp.getText().substring(i, i + 1);
+                                if(str.equals(" ") || str.equals("\t") || str.equals("\n")) break;
+                                else target += str;
+                            }
+
+                            target = new StringBuffer(target).reverse().toString();
+
+                            for(JavaVariable v : parser.getFields()) {
+                                if(v.getName().equals(target)) {
+                                    autoGUI.setListData(Controller.autoComplete(Class.forName(v.getClassName())));
+                                    autoGUI.setVisible(true);
+                                }
+                            }
+                            
+                        } catch (ClassNotFoundException e1) {
+                            e1.printStackTrace();
+                        }
 
                     }else{
                         period = true;
                     }
-                    
+
                 }
             }
                 public void keyReleased(KeyEvent e){}
@@ -136,6 +173,8 @@ public class EditorPanel extends JScrollPane{
         this.getHorizontalScrollBar().setUI(new BlackScrollBarUI());
         this.getVerticalScrollBar().setUI(new BlackScrollBarUI());
         this.setRowHeaderView(view);
+        
+        parse();
     }
 
     private Optional<Pattern> getPattern() {
@@ -177,7 +216,6 @@ public class EditorPanel extends JScrollPane{
         Highlighter.Highlight[] array = highlighter.getHighlights();
         int hits = array.length;
         if (hits == 0) {
-            current = -1;
             removeHighlights();
         } else {
             Highlighter.Highlight hh = highlighter.getHighlights()[0];
@@ -204,6 +242,14 @@ public class EditorPanel extends JScrollPane{
 
     public JTextPane getEditor() {
         return this.jp;
+    }
+
+    public JavaParser getParser() {
+        return this.parser;
+    }
+
+    public void parse() {
+        parser.parse();
     }
 
 }

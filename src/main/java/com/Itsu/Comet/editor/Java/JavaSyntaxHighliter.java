@@ -3,19 +3,28 @@ package com.Itsu.Comet.editor.Java;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.swing.JTextPane;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.Element;
 import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
-import javax.swing.text.StyleContext;
 
 import com.Itsu.Comet.core.Controller;
 import com.Itsu.Comet.editor.SyntaxHighliter;
+
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * @author Itsu
+ *
+ */
 
 public class JavaSyntaxHighliter extends DefaultStyledDocument implements SyntaxHighliter{
     private static final char LB = '\n';
@@ -29,12 +38,8 @@ public class JavaSyntaxHighliter extends DefaultStyledDocument implements Syntax
     private MutableAttributeSet multiLineCom;
     private MutableAttributeSet returnToken;
     private Set<String> keywords;
-    private final Style nomal = getStyle(StyleContext.DEFAULT_STYLE);
-
     private boolean multi = false;
     private int multiOff = 0;
-
-    private JTextPane pane;
 
     public JavaSyntaxHighliter() {
         super();

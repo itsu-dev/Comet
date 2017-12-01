@@ -24,6 +24,18 @@ import javax.swing.ImageIcon;
 
 import com.Itsu.Comet.core.Controller;
 
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * @author Itsu
+ *
+ */
+
 public class Utils {
 
     public static void writeFile(String fileName, String content) throws IOException {

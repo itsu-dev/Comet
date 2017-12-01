@@ -6,7 +6,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.filechooser.FileSystemView;
-import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeCellRenderer;
 
 import com.Itsu.Comet.core.Controller;
@@ -17,9 +16,19 @@ import com.Itsu.Comet.gui.ImagePanel;
 import com.Itsu.Comet.utils.PropertyReader;
 import com.Itsu.Comet.utils.Utils;
 
-public class ProjectManager {
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * @author Itsu
+ *
+ */
 
-    private DefaultMutableTreeNode root;
+public class ProjectManager {
 
     public ProjectManager(){
 

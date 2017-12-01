@@ -10,13 +10,27 @@ import javax.swing.JFrame;
 
 import com.Itsu.Comet.gui.Editor;
 import com.Itsu.Comet.gui.MenuBar;
+import com.Itsu.Comet.gui.TaskBar;
 import com.Itsu.Comet.gui.Window;
 import com.Itsu.Comet.utils.SplashWindow;
 import com.Itsu.Comet.utils.Version;
 
-public class Comet extends JFrame{
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * @author Itsu
+ *
+ */
+
+public class Comet extends JFrame {
 
     private JDesktopPane mdi;
+    private TaskBar bar;
     private static Comet instance;
 
     public Comet(){
@@ -66,12 +80,18 @@ public class Comet extends JFrame{
         mdi = new JDesktopPane();
         mdi.setBackground(Color.LIGHT_GRAY);
         this.getContentPane().add(mdi, BorderLayout.CENTER);
+        
+        bar = new TaskBar();
+        this.getContentPane().add(bar, BorderLayout.SOUTH);
 
         Controller.setDesktopPane(mdi);
         Controller.setJFrame(this);
 
         Controller.openEditor(new Editor(), "Editor");
         Controller.openView1(new Window(Window.PROJECT), "View1");
+        
+        Controller.setTaskBar(bar);
+        Controller.setStatusText("準備完了");
 
         this.setVisible(true);
     }

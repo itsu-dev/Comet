@@ -4,15 +4,25 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import com.Itsu.Comet.core.Controller;
 import com.Itsu.Comet.ui.BlackScrollBarUI;
 
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * @author Itsu
+ *
+ */
+
 public class ImagePanel extends JScrollPane{
 	
-	private JPanel panel = new JPanel();
 	private JLabel label;
 	
 	public ImagePanel(BufferedImage img){

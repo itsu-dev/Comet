@@ -18,6 +18,7 @@ import com.Itsu.Comet.gui.Editor;
 import com.Itsu.Comet.gui.NukkitTest;
 import com.Itsu.Comet.gui.ProjectSetter;
 import com.Itsu.Comet.gui.ProjectTab;
+import com.Itsu.Comet.gui.TaskBar;
 import com.Itsu.Comet.gui.View;
 import com.Itsu.Comet.project.ProjectFile;
 import com.Itsu.Comet.project.ProjectMaker;
@@ -27,10 +28,23 @@ import com.Itsu.Comet.utils.Data;
 import com.Itsu.Comet.utils.MessagePopup;
 import com.Itsu.Comet.utils.Utils;
 
+/**
+ *
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ *
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ *
+ * @author Itsu
+ *
+ */
+
 public class Controller {
 
     private static Data data = new Data();
     private static Colors color = new Colors();
+    private static TaskBar bar;
     private static AutoComplete<Object> complete = new AutoComplete<>();
 
     public Controller(){
@@ -104,6 +118,14 @@ public class Controller {
         g.drawString(text, 250, 180);
 
         splash.update();
+    }
+
+    protected static void setTaskBar(TaskBar bar) {
+        Controller.bar = bar;
+    }
+
+    public static void setStatusText(String text) {
+        bar.setStatusText(text);
     }
 
     public static void setDesktopPane(JDesktopPane pane){
@@ -188,7 +210,7 @@ public class Controller {
     }
 
     public static void openNukkitTest(){
-        NukkitTest.showWindow();
+        new NukkitTest();
     }
 
     public static void initSkinColor(){

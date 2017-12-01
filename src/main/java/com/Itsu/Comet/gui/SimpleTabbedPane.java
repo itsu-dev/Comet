@@ -16,13 +16,22 @@ import javax.swing.JTabbedPane;
 import com.Itsu.Comet.core.Controller;
 import com.Itsu.Comet.project.ProjectFile;
 
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * @author Itsu
+ *
+ */
+
 public class SimpleTabbedPane extends JTabbedPane {
-	
-	private JTabbedPane tabbedPane;
 
     public SimpleTabbedPane() {
         super();
-        tabbedPane = this;
     }
 
     @Override
@@ -31,7 +40,7 @@ public class SimpleTabbedPane extends JTabbedPane {
         tab.setOpaque(false);
 
         JLabel label = new JLabel(title);
-        label.setForeground(Controller.getColors().get("EDITOR_TEXT"));
+        label.setForeground(Controller.getColors().get("EDITOR"));
         label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 4));
 
         JLabel button = new JLabel("x", JLabel.RIGHT);

@@ -10,6 +10,18 @@ import javax.swing.tree.TreePath;
 
 import com.Itsu.Comet.core.Controller;
 
+/**
+ * 
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ * 
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ * 
+ * @author Itsu
+ *
+ */
+
 public class ProjectPopupMenu extends JPopupMenu{
 
     private JMenuItem test = new JMenuItem("テスト                        ");
