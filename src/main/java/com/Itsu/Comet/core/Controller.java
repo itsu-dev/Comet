@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 
@@ -91,6 +92,10 @@ public class Controller {
 
     public static ProjectTab getProjectTab(){
         return Server.getProjectTab();
+    }
+    
+    public static void addComponent(String title, JComponent component){
+        Server.addComponent(title, component);
     }
 
     public static void openView1(View view, String key){

@@ -43,7 +43,15 @@ public class FolderSelectionListener implements TreeSelectionListener {
      }
      final File parent = (File) node.getUserObject();
      if (!parent.isDirectory()) {
+    	 
+    	 if(parent.getName().equals("project.proj")) {
+    		 Controller.alert("このファイルはプロジェクトに関する重要な情報が保存されているため開くことができません。");
+    		 return;
+    	 }
+    	 
+    	 Controller.setStatusText(parent.getName() + "を開いています...");
     	 ProjectManager.openFile(parent);
+    	 Controller.setStatusText("準備完了");
     	 
     	 File f;
     	 while(true){

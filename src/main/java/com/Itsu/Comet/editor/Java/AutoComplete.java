@@ -70,7 +70,7 @@ public class AutoComplete<T> {
             sb.append(" : ");
             sb.append(method.getReturnType().getSimpleName());
 
-            mNames.put(sb.toString(), method.getName());
+            mNames.put(sb.toString(), sb.toString().split(" : ")[0]);
         }
 
         for(Field field : fields) {
@@ -79,7 +79,7 @@ public class AutoComplete<T> {
             sb.append(" : ");
             sb.append(field.getType().getSimpleName());
 
-            fNames.put(sb.toString(), field.getName());
+            fNames.put(sb.toString(), sb.toString().split(" : ")[0]);
         }
 
         for(String str : mNames.keySet()) {

@@ -37,7 +37,7 @@ public class TextPaneListener implements MouseListener {
 			}
 			
 		} else if(e.getClickCount() == 2) {
-			pane.changeHighlight();
+			pane.changeHighlight(pane.getEditor().getSelectedText());
 		}
 		
 	}

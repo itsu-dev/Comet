@@ -3,12 +3,14 @@ package com.Itsu.Comet.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JComponent;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 
 import com.Itsu.Comet.gui.Editor;
 import com.Itsu.Comet.gui.ProjectTab;
 import com.Itsu.Comet.gui.View;
+import com.Itsu.Comet.gui.Window;
 import com.Itsu.Comet.project.ProjectFile;
 
 /**
@@ -45,6 +47,14 @@ public class Server{
     protected static void removeActiveWindow(View frame, String key){
         activeWindows.remove(frame);
         activeWindowsKeys.remove(key);
+    }
+    
+    protected static void addComponent(String title, JComponent component) {
+    	for(View view : activeWindows) {
+    		if(view instanceof Window) {
+    			((Window) view).addTab(title, component);
+    		}
+    	}
     }
 
     protected static Editor getEditor(){

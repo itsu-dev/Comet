@@ -25,14 +25,14 @@ public class HighlightListener implements DocumentListener {
 		this.pane = pane;
 	}
 	
-    @Override public void changedUpdate(DocumentEvent e) { /* not needed */ }
+    @Override public void changedUpdate(DocumentEvent e) {}
     
     @Override public void insertUpdate(DocumentEvent e) {
-        pane.changeHighlight();
+        pane.changeHighlight(pane.getEditor().getSelectedText());
     }
     
     @Override public void removeUpdate(DocumentEvent e) {
-        pane.changeHighlight();
+        pane.changeHighlight(pane.getEditor().getSelectedText());
     }
     
 }

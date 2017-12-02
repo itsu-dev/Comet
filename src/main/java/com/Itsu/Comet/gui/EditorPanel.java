@@ -6,7 +6,6 @@ import java.awt.FontMetrics;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -36,13 +35,13 @@ import com.Itsu.Comet.ui.BlackScrollBarUI;
 import com.Itsu.Comet.utils.EditorFont;
 
 /**
- * 
+ *
  * <h6>Comet project</h6>
  * <p>for PMMP/Jupiter/Nukkit plugin
- * 
+ *
  * <p>Java（PHP）構文向けIDEプロジェクト
  * <p>Made by Itsu(Twitter: @itsu_dev)
- * 
+ *
  * @author Itsu
  *
  */
@@ -67,6 +66,7 @@ public class EditorPanel extends JScrollPane{
     };
 
     private boolean period = true;
+	private boolean completing = false;
 
     public EditorPanel(SyntaxHighliter jsh){
         this(jsh, null);
@@ -99,10 +99,74 @@ public class EditorPanel extends JScrollPane{
         jp.getDocument().addDocumentListener(new HighlightListener(this));
         jp.addKeyListener(new KeyListener(){
             public void keyPressed(KeyEvent e){
+            	
+            	e.consume();
 
                 String insert = null;
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    e.consume();
+                	
+                	if(completing) {
+                		
+                		int offset = jp.getCaretPosition();
+                		int start = 0, end = 0;
+                		boolean next = false;
+                		
+                		for(int i = offset;i < jp.getText().length();i++) {
+                			String str = jp.getText().substring(i, i + 1);
+                			
+                			if(str.equals(")")) {
+                				jp.setCaretPosition(i + 1);
+                				next = false;
+                				completing = false;
+                				break;
+                				
+                			} else if(str.equals(",") || str.equals(" ")) {
+                				continue;
+                				
+                			} else {
+                				start = i;
+                				for(int ii = start;ii < jp.getText().length();ii++) {
+                					
+                					String str1 = jp.getText().substring(ii, ii + 1);
+                					if(str1.equals(",") || str1.equals(" ") || str1.equals(")")) {
+                						end = ii;
+                						break;
+                						
+                					} else {
+                						continue;
+                					}
+                					
+                				}
+                				
+                				for(int ii = end;ii < jp.getText().length();ii++) {
+                					
+                					String str1 = jp.getText().substring(ii, ii + 1);
+                					if(str1.equals(",")) {
+                						next = true;
+                						break;
+                						
+                					} else if(str1.equals(" ")) {
+                						continue;
+                						
+                					}
+                					
+                				}	
+                				
+                				jp.select(start, end);
+                				
+                				if(!next) {
+                					completing = false;
+                				}
+                				
+                				break;
+                			}
+                			
+                		}
+                		
+                		return;
+                		
+                	}
+                	
                     for(int i=0; i<ia.getTabSize(jp); i++){
                         insert += "\t";
                     }
@@ -137,7 +201,7 @@ public class EditorPanel extends JScrollPane{
                                     autoGUI.setVisible(true);
                                 }
                             }
-                            
+
                         } catch (ClassNotFoundException e1) {
                             e1.printStackTrace();
                         }
@@ -173,14 +237,14 @@ public class EditorPanel extends JScrollPane{
         this.getHorizontalScrollBar().setUI(new BlackScrollBarUI());
         this.getVerticalScrollBar().setUI(new BlackScrollBarUI());
         this.setRowHeaderView(view);
-        
+
         parse();
     }
 
-    private Optional<Pattern> getPattern() {
-        String text = jp.getSelectedText();
+    private Optional<Pattern> getPattern(String target) {
+        String text = target;
 
-        if (Objects.isNull(text) || text.isEmpty()) {
+        if (text == null || text.isEmpty()) {
             return Optional.empty();
         }
         String cw = "\\b";
@@ -193,12 +257,12 @@ public class EditorPanel extends JScrollPane{
         }
     }
 
-    public void changeHighlight() {
+    public void changeHighlight(String target) {
         highlighter = jp.getHighlighter();
         highlighter.removeAllHighlights();
 
         Document doc = jp.getDocument();
-        getPattern().ifPresent(pattern -> {
+        getPattern(target).ifPresent(pattern -> {
             try {
                 Matcher matcher = pattern.matcher(doc.getText(0, doc.getLength()));
                 int pos = 0;
@@ -250,6 +314,11 @@ public class EditorPanel extends JScrollPane{
 
     public void parse() {
         parser.parse();
+    }
+
+    
+    public void setCompleting(boolean b) {
+    	this.completing = b;
     }
 
 }

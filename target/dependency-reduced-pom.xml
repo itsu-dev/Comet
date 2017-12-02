@@ -23,23 +23,6 @@
         </executions>
       </plugin>
       <plugin>
-        <artifactId>maven-enforcer-plugin</artifactId>
-        <version>1.4.1</version>
-        <executions>
-          <execution>
-            <id>enforce</id>
-            <goals>
-              <goal>enforce</goal>
-            </goals>
-            <configuration>
-              <rules>
-                <DependencyConvergence />
-              </rules>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
         <artifactId>maven-shade-plugin</artifactId>
         <version>2.4.1</version>
         <executions>
@@ -56,11 +39,6 @@
               <mainClass>com.Itsu.Comet.core.Comet</mainClass>
             </transformer>
           </transformers>
-          <artifactSet>
-            <includes>
-              <include>cn.nukkit:nukkit</include>
-            </includes>
-          </artifactSet>
           <dependencyReducedPomLocation>${project.build.directory}/dependency-reduced-pom.xml</dependencyReducedPomLocation>
         </configuration>
       </plugin>
@@ -79,15 +57,6 @@
       </plugin>
     </plugins>
   </build>
-  <dependencies>
-    <dependency>
-      <groupId>cn.nukkit</groupId>
-      <artifactId>nukkit</artifactId>
-      <version>1.0-SNAPSHOT</version>
-      <scope>system</scope>
-      <systemPath>C:\Users\itsu0\Desktop\Itsuru\Jupiter\nukkit-1.0-SNAPSHOT.jar</systemPath>
-    </dependency>
-  </dependencies>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>

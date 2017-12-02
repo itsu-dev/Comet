@@ -3,6 +3,7 @@ package com.Itsu.Comet.listener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
 
 import com.Itsu.Comet.core.Controller;
@@ -33,7 +34,52 @@ public class ListListener implements MouseListener {
 		if(e.getClickCount() == 2) {
 			String src = Controller.getToken((String) gui.getList().getSelectedValue());
 			try {
-				gui.getEditorPanel().getEditor().getDocument().insertString(gui.getOffset() + 1, src, null);
+				JTextPane pane = gui.getEditorPanel().getEditor();
+				
+				pane.getDocument().insertString(gui.getOffset() + 1, src, null);
+				
+				if(src.contains("(")) {
+					
+					int start = 0, end = 0;
+					boolean isSplit = false;
+					
+					for(int i = pane.getCaretPosition(); i > 0;i--) {
+						if(pane.getText().substring(i, i + 1).equals("(")) {
+							start = i + 1;
+							break;
+							
+						} else if(!isSplit && pane.getText().substring(i, i + 1).equals(" ")) {
+							
+							if(pane.getText().substring(i, i + 1).equals(" ") || pane.getText().substring(i, i + 1).equals(",")) {
+								isSplit = true;
+								continue;
+							}
+							
+							start = i + 1;
+							break;
+						}
+					}
+					
+					for(int i = start; i < pane.getText().length();i++) {
+						if(pane.getText().substring(i, i + 1).equals(",")) {
+							end = i;
+							break;
+							
+						} else if(pane.getText().substring(i, i + 1).equals(" ")) {
+							end = i;
+							break;
+							
+						} else if(pane.getText().substring(i, i + 1).equals(")")) {
+							end = i;
+							break;
+						}
+					}
+					
+					pane.select(start, end);
+				
+				}
+				
+				gui.getEditorPanel().setCompleting(true);
 				gui.setVisible(false);
 			} catch (BadLocationException e1) {
 				e1.printStackTrace();
