@@ -1,5 +1,8 @@
-![Comet](https://github.com/itsu020402/Comet/blob/master/Window.jpg)
-
+![Comet](https://github.com/itsu020402/Comet/blob/master/Window.jpg)  
+  
+### 最新版ダウンロード（開発途中を含む）/ Download newest version (Includes those under development)
+https://github.com/itsu020402/Comet/blob/master/target/Comet-1.jar   
+  
 # Comet Project (日本語)
 Comet - PMMP/Nukkitプラグイン開発ソフトウェア  
 
