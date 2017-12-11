@@ -18,6 +18,9 @@ Controllerクラスをメインに動かしていて、多くの機能はこの�
 - [ ] プラグインを圧縮 
 - [ ] 関数辞典/メソッド辞典  
   
+## ライセンス
+GPL（GNU General Public License）v3.0  
+  
 # Comet Project (English)
 Comet - Development tool for PMMP/Nukkit/Jupiter plugins and Java  
 
@@ -35,6 +38,10 @@ Almost functions are controlled by Controller class.
 - [ ] Test for your plugins after clicked the button onetime  
 - [ ] Compress your plugins or Java softwares  
 - [ ] Dictionaries of methods and functions  
+  
+## LICENSE
+GPL（GNU General Public License）v3.0  
+  
   
 
 
