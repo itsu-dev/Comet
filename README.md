@@ -14,6 +14,8 @@ Controllerクラスをメインに動かしていて、多くの機能はこの�
 ## 機能
 - [x] PHP/Javaのシンタックスハイライト  
 - [x] プロジェクト管理  
+- [x] 自動補完  
+- [x] 入力アシスト  
 - [ ] ボタンクリックでプラグインをテスト  
 - [ ] プラグインを圧縮 
 - [ ] 関数辞典/メソッド辞典  
@@ -35,7 +37,9 @@ Almost functions are controlled by Controller class.
 ## Functions
 - [x] Syntax Highlights (PHP/Java) 
 - [x] Project manager  
-- [ ] Test for your plugins after clicked the button onetime  
+- [x] Automatic complete  
+- [x] Typing assist  
+- [ ] Test(Debug) for your plugins after clicked the button onetime  
 - [ ] Compress your plugins or Java softwares  
 - [ ] Dictionaries of methods and functions  
   
