@@ -39,6 +39,7 @@ public class FileTreeCellRenderer extends DefaultTreeCellRenderer {
             c.setOpaque(false);
             c.setForeground(Controller.getColors().get(6));
             c.setBackground(Controller.getColors().get("MENU_BAR_SELECT")); //getBackgroundSelectionColor());
+            
         } else {
             c.setOpaque(true);
             c.setForeground(Controller.getColors().get("EDITOR_TEXT"));

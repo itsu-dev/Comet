@@ -9,6 +9,7 @@ import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 
 import com.Itsu.Comet.gui.Editor;
+import com.Itsu.Comet.gui.FileBar;
 import com.Itsu.Comet.gui.MenuBar;
 import com.Itsu.Comet.gui.TaskBar;
 import com.Itsu.Comet.gui.Window;
@@ -31,20 +32,21 @@ public class Comet extends JFrame {
 
     private JDesktopPane mdi;
     private TaskBar bar;
+    private FileBar fileBar;
     private static Comet instance;
 
-    public Comet(){
+    public Comet() {
 
     }
 
     public static void main(String[] args){
+    	/*
         System.setProperty("awt.useSystemAAFontSettings","on");
-        System.setProperty("swing.aatext", "true");
+        System.setProperty("swing.aatext", "true");*/
         Toolkit.getDefaultToolkit().setDynamicLayout(true);
 
         try {
             new SplashWindow();
-            Controller.setSplashText("初期化中...");
         } catch (NullPointerException | IllegalStateException | IOException e) {
             e.printStackTrace();
         }
@@ -52,16 +54,13 @@ public class Comet extends JFrame {
         Comet comet = new Comet();
         instance = comet;
 
-        Controller.setSplashText("ファイルのチェック中...");
         Controller.checkFile();
 
-        Controller.setSplashText("データの取得中...");
         Controller.initData();
         Controller.initSkinColor();
         Controller.initJavaColor();
         Controller.initPHPColor();
         
-        Controller.setSplashText("UIを読み込み中...");
         Controller.initUI();
 
         comet.installGui(JFrame.EXIT_ON_CLOSE);
@@ -76,6 +75,9 @@ public class Comet extends JFrame {
         this.setJMenuBar(new MenuBar());
         this.setDefaultCloseOperation(type);
         this.setIconImage(Controller.getDataObject().getIcon());
+        
+        fileBar = new FileBar();
+        this.getContentPane().add(fileBar, BorderLayout.NORTH);
 
         mdi = new JDesktopPane();
         mdi.setBackground(Color.LIGHT_GRAY);
@@ -84,6 +86,7 @@ public class Comet extends JFrame {
         bar = new TaskBar();
         this.getContentPane().add(bar, BorderLayout.SOUTH);
 
+        Controller.setFileBar(fileBar);
         Controller.setDesktopPane(mdi);
         Controller.setJFrame(this);
 

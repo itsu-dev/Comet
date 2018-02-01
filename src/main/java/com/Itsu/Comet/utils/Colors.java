@@ -126,6 +126,11 @@ public class Colors {
                     java.put("keyword", new Color(Integer.parseInt(c[0]), Integer.parseInt(c[1]), Integer.parseInt(c[2])));
                     continue;
 
+                } else if(temp1.equals(type + "_primitive")) {
+                    String[] c = temp[1].split(",");
+                    java.put("primitive", new Color(Integer.parseInt(c[0]), Integer.parseInt(c[1]), Integer.parseInt(c[2])));
+                    continue;
+                    
                 } else if(temp1.equals(type + "_annotation")) {
                     String[] c = temp[1].split(",");
                     java.put("annotation", new Color(Integer.parseInt(c[0]), Integer.parseInt(c[1]), Integer.parseInt(c[2])));
@@ -134,6 +139,11 @@ public class Colors {
                 } else if(temp1.equals(type + "_returnToken")) {
                     String[] c = temp[1].split(",");
                     java.put("returnToken", new Color(Integer.parseInt(c[0]), Integer.parseInt(c[1]), Integer.parseInt(c[2])));
+                    continue;
+                    
+                } else if(temp1.equals(type + "_field")) {
+                    String[] c = temp[1].split(",");
+                    java.put("field", new Color(Integer.parseInt(c[0]), Integer.parseInt(c[1]), Integer.parseInt(c[2])));
                     continue;
 
                 } else if(temp1.equals(type + "_comment")) {

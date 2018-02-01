@@ -1,10 +1,3 @@
-/*
- * This ui is made by:
- * http://ui-ideas.blogspot.jp/2012/06/mac-os-x-mountain-lion-scrollbars-in.html
- * 
- * Forked by Itsu
- */
-
 package com.Itsu.Comet.ui;
 
 /**
@@ -15,7 +8,7 @@ package com.Itsu.Comet.ui;
  * <p>Java（PHP）構文向けIDEプロジェクト
  * <p>Made by Itsu(Twitter: @itsu_dev)
  * 
- * This ui is made by:
+ * This ui was made by:
  * http://ui-ideas.blogspot.jp/2012/06/mac-os-x-mountain-lion-scrollbars-in.html
  * 
  * Forked by Itsu
@@ -42,7 +35,7 @@ public class BlackScrollBarUI extends BasicScrollBarUI {
     private static final int SCROLL_BAR_ALPHA = 100;
     private static final int THUMB_BORDER_SIZE = 5;
     private static final int THUMB_SIZE = 8;
-    private static final Color THUMB_COLOR = Color.BLACK;
+    private static final Color THUMB_COLOR = Color.WHITE;
     
     @Override
     protected JButton createDecreaseButton(int orientation) {
@@ -56,6 +49,8 @@ public class BlackScrollBarUI extends BasicScrollBarUI {
 
     @Override
     protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
+    	g.setColor(new Color(33, 33, 33));
+    	g.fillRect(trackBounds.x, trackBounds.y, trackBounds.width, trackBounds.height);
     }
 
     @Override
@@ -90,6 +85,7 @@ class MyScrollBarButton extends JButton {
         setFocusPainted(false);
         setBorderPainted(false);
         setBorder(BorderFactory.createEmptyBorder());
+        setBackground(new Color(33, 33, 33));
     }
 }
 

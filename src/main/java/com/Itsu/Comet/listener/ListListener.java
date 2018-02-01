@@ -84,6 +84,10 @@ public class ListListener implements MouseListener {
 			} catch (BadLocationException e1) {
 				e1.printStackTrace();
 			}
+			
+			
+		} else if(e.getClickCount() == 1) {
+			
 		}
 	}
 

@@ -48,7 +48,9 @@ public class TaskBar extends JPanel {
         field = new JTextField();
         field.setPreferredSize(new Dimension(200, 15));
         field.setFont(new Font(Controller.getDataObject().getSystemFont(), Font.PLAIN, 12));
-        field.setBorder(new LineBorder(Controller.getColors().get(6)));
+        field.setBorder(new LineBorder(Controller.getColors().get(5)));
+        field.setBackground(Controller.getColors().get("EDITOR"));
+        field.setForeground(Controller.getColors().get("EDITOR_TEXT"));
         field.setCaretColor(new Color(14, 139, 252));
         field.setSelectionColor(new Color(25,118,210));
         field.setBounds(0, 0, 200, 30);

@@ -1,6 +1,7 @@
 package com.Itsu.Comet.gui;
 
 import java.awt.BorderLayout;
+import java.io.File;
 
 import javax.swing.JComponent;
 import javax.swing.JTabbedPane;
@@ -37,7 +38,7 @@ public class Editor extends View{
         h = (int) Controller.getJFrame().getHeight() - 105;
 
         this.setBackground(Controller.getColors().get("EDITOR"));
-        this.setBounds((int) (w * 0.2), 0, (int) (w * 0.8), h);
+        this.setBounds((int) (w * 0.2), 0, (int) (w * 0.8), h - 20);
         this.setView(this);
         this.setViewKey("Editor");
 
@@ -66,9 +67,8 @@ public class Editor extends View{
 					
 					Controller.setNowProject(projectName);
 					Controller.setNowProjectPath(projectFilePath);
+					Controller.setFileBarContent(new File(projectFilePath));
 		            Controller.getJFrame().setTitle("Comet " + Version.VERSION + " - " + projectFilePath);
-					
-					System.out.println(projectFilePath);
 					
 				}catch(ArrayIndexOutOfBoundsException ex){
 					return;

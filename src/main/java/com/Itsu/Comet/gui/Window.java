@@ -33,7 +33,7 @@ public class Window extends View{
         h = (int) Controller.getJFrame().getHeight() - 105;
 
         this.setBackground(Controller.getColors().get("EDITOR"));
-        this.setBounds(0, 0, (int) (w * 0.2), h);
+        this.setBounds(0, 0, (int) (w * 0.2), h - 20);
         this.setView(this);
         this.setViewKey("View1");
 

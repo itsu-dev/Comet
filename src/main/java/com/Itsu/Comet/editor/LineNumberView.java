@@ -1,6 +1,5 @@
 package com.Itsu.Comet.editor;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -71,7 +70,7 @@ public class LineNumberView extends JComponent {
         });
         Insets i = jp.getInsets();
         setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createMatteBorder(0, 0, 0, 1, Color.GRAY),
+            BorderFactory.createMatteBorder(0, 0, 0, 1, Controller.getColors().get("LINE_NUMBER")),
             BorderFactory.createEmptyBorder(i.top, MARGIN, i.bottom, MARGIN - 1)));
         setOpaque(true);
         setBackground(Controller.getColors().get("EDITOR"));
@@ -104,12 +103,12 @@ public class LineNumberView extends JComponent {
         int base  = clip.y;
         int start = getLineAtPoint(base);
         int end   = getLineAtPoint(base + clip.height);
-        int y     = start * fontHeight;
+        int y     = start * fontHeight + 3;
         int rmg   = getBorder().getBorderInsets(this).right;
         for (int i = start; i <= end; i++) {
             String text = String.valueOf(i + 1);
             int x = getComponentWidth() - rmg - fontMetrics.stringWidth(text);
-            y += fontAscent;
+            y += fontAscent - 2;
             g.drawString(text, x, y);
             y += fontDescent + fontLeading;
         }

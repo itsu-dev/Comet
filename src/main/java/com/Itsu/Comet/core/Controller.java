@@ -1,9 +1,6 @@
 package com.Itsu.Comet.core;
 
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.SplashScreen;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -16,6 +13,7 @@ import javax.swing.JFrame;
 
 import com.Itsu.Comet.editor.Java.AutoComplete;
 import com.Itsu.Comet.gui.Editor;
+import com.Itsu.Comet.gui.FileBar;
 import com.Itsu.Comet.gui.NukkitTest;
 import com.Itsu.Comet.gui.ProjectSetter;
 import com.Itsu.Comet.gui.ProjectTab;
@@ -46,6 +44,7 @@ public class Controller {
     private static Data data = new Data();
     private static Colors color = new Colors();
     private static TaskBar bar;
+    private static FileBar fileBar;
     private static AutoComplete<Object> complete = new AutoComplete<>();
 
     public Controller(){
@@ -93,7 +92,7 @@ public class Controller {
     public static ProjectTab getProjectTab(){
         return Server.getProjectTab();
     }
-    
+
     public static void addComponent(String title, JComponent component){
         Server.addComponent(title, component);
     }
@@ -111,20 +110,6 @@ public class Controller {
             Server.removeActiveWindow(view, key);
         }
     }
-
-    public static void setSplashText(String text) {
-        SplashScreen splash = SplashScreen.getSplashScreen();
-
-        Graphics g = splash.createGraphics();
-        g.setColor(new Color(48, 62, 158));
-        g.fillRect(200, 160, 250, 22);
-        g.setColor(Color.WHITE);
-        g.setFont(new Font("ＭＳ ゴシック", Font.PLAIN, 15));
-        g.drawString(text, 250, 180);
-
-        splash.update();
-    }
-
     protected static void setTaskBar(TaskBar bar) {
         Controller.bar = bar;
     }
@@ -187,6 +172,14 @@ public class Controller {
 
     public static ProjectFile getProjectFileByIndex(int index) {
         return Server.getProjectFileByIndex(index);
+    }
+    
+    public static void setFileBar(FileBar bar) {
+    	fileBar = bar;
+    }
+    
+    public static void setFileBarContent(File file) {
+    	fileBar.addLabels(file);
     }
 
     public static ImageIcon getIcon(String filename) {

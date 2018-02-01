@@ -48,11 +48,11 @@ public class ProjectManager {
             	Controller.setOpenFiles(new ProjectFile(name, path, "java"));
                 Controller.getEditor().addTab(name, path, new EditorPanel(new JavaSyntaxHighliter(), texts));
 
-            }else if(name.toLowerCase().endsWith(".php")){
+            } else if(name.toLowerCase().endsWith(".php")){
             	Controller.setOpenFiles(new ProjectFile(name, path, "php"));
                 Controller.getEditor().addTab(name, path, new EditorPanel(new PHPSyntaxHighliter(), texts));
                 
-            }else if(name.toLowerCase().endsWith(".png")
+            } else if(name.toLowerCase().endsWith(".png")
         			|| name.toLowerCase().endsWith(".jpg")
         			|| name.toLowerCase().endsWith(".jpeg")
         			|| name.toLowerCase().endsWith(".bmp")
@@ -67,13 +67,11 @@ public class ProjectManager {
             	Controller.setOpenFiles(new ProjectFile(name, path, "image"));
             	Controller.getEditor().addTab(name, path, new ImagePanel(ImageIO.read(file)));
         		
-            }else{
+            } else {
             	Controller.setOpenFiles(new ProjectFile(name, path, "other"));
                 Controller.getEditor().addTab(name, path, new EditorPanel(null, texts));
                 
             }
-            
-            //Controller.getJFrame().setTitle("Comet " + Version.VERSION + " - " + path);
 
         } catch (IOException e) {
             e.printStackTrace();

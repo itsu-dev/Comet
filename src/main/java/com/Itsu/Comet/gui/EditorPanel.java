@@ -16,6 +16,7 @@ import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Document;
+import javax.swing.text.Element;
 import javax.swing.text.Highlighter;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
@@ -32,7 +33,6 @@ import com.Itsu.Comet.editor.Java.JavaVariable;
 import com.Itsu.Comet.listener.HighlightListener;
 import com.Itsu.Comet.listener.TextPaneListener;
 import com.Itsu.Comet.ui.BlackScrollBarUI;
-import com.Itsu.Comet.utils.EditorFont;
 
 /**
  *
@@ -85,25 +85,27 @@ public class EditorPanel extends JScrollPane{
 
         view = new LineNumberView(jp);
         autoGUI = new AutoGUI(this);
-        parser = new JavaParser(jp);
+        parser = new JavaParser(this);
 
         jp.setPreferredSize(this.getMaximumSize());
         jp.setBackground(Controller.getColors().get("EDITOR"));
         jp.setForeground(Controller.getColors().get("EDITOR_TEXT"));
         jp.setCaretColor(new Color(14, 139, 252));
-        jp.setSelectionColor(new Color(25,118,210));
-        jp.setSelectedTextColor(Color.WHITE);
-        jp.setFont(new Font(new EditorFont().createEditorFont().getName(), Font.PLAIN, 14));
+        jp.setSelectionColor(Controller.getColors().get("MENU_BAR_SELECT"));
+        jp.setSelectedTextColor(Controller.getColors().get("EDITOR_TEXT"));
+        jp.setFont(new Font("ＭＳ ゴシック", Font.PLAIN, 14));
         jp.setComponentPopupMenu(new TextPanePopup(this));
         jp.addMouseListener(new TextPaneListener(this));
         jp.getDocument().addDocumentListener(new HighlightListener(this));
         jp.addKeyListener(new KeyListener(){
             public void keyPressed(KeyEvent e){
             	
-            	e.consume();
+            	//e.consume();
 
                 String insert = null;
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                	
+                	e.consume();
                 	
                 	if(completing) {
                 		
@@ -210,6 +212,31 @@ public class EditorPanel extends JScrollPane{
                         period = true;
                     }
 
+                } else if(e.getKeyCode() == KeyEvent.VK_SEMICOLON) {
+                	parse();
+                	
+                } else if(e.getKeyCode() == KeyEvent.VK_TAB) {
+                	try {
+	                	Element root = jp.getDocument().getDefaultRootElement();
+	                	
+	                	int start = root.getElementIndex(jp.getSelectionStart());
+	                	int end = root.getElementIndex(start + jp.getSelectionEnd());
+	                	
+	                    if (start > end) start = end;
+	                	
+	                	System.out.println(end - start);
+	                	
+	                	if(end - start > 0 && jp.getSelectedText() != null && jp.getSelectedText().contains("\n")) {
+	                		e.consume();
+		                	for (int i = start; i <= end; i++) {
+		                        int startOffset = root.getElement(i).getStartOffset();
+		                	    jp.getDocument().insertString(startOffset, "\t", null);
+		                    }
+	                	}
+                	} catch(BadLocationException ex) {
+                		ex.printStackTrace();
+                	}
+                	
                 }
             }
                 public void keyReleased(KeyEvent e){}
