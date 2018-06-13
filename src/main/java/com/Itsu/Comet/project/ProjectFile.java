@@ -1,5 +1,7 @@
 package com.Itsu.Comet.project;
 
+import java.util.List;
+
 /**
  * 
  * <h6>Comet project</h6>
@@ -17,6 +19,7 @@ public final class ProjectFile {
     private String name;
     private String path;
     private String type;
+    private List<String> dependencies;
 
     public ProjectFile(String name, String path, String type) {
         this.name = name;

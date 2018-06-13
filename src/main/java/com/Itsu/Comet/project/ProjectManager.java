@@ -43,6 +43,8 @@ public class ProjectManager {
             String texts = Utils.readFile(file);
             
             Controller.setNowProjectPath(path);
+            
+            System.out.println(name);
 
             if(name.toLowerCase().endsWith(".java")){
             	Controller.setOpenFiles(new ProjectFile(name, path, "java"));

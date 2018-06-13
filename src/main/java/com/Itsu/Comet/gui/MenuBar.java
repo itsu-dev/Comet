@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JColorChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -26,15 +27,21 @@ public class MenuBar extends JMenuBar implements ActionListener{
 
     private JMenu file;
     private JMenu edit;
+    private JMenu run;
     private JMenu window;
     private JMenu setting;
     private JMenu plugin;
+    private JMenu util;
     
     private JMenuItem newProject;
     private JMenuItem save;
     
     private JMenuItem undo;
     private JMenuItem redo;
+    
+    private JMenuItem doRun;
+    private JMenuItem runBefore;
+    private JMenuItem runProject;
 
     private JMenuItem windowNew;
     private JMenuItem windowNewEditor;
@@ -45,6 +52,9 @@ public class MenuBar extends JMenuBar implements ActionListener{
     private JMenuItem pmmpDictionary;
     private JMenuItem pmmpSetting;
     private JMenuItem pmmpTest;
+    
+    private JMenuItem color;
+    private JMenuItem shell;
 
     public MenuBar(){
         setting = new JMenu("設定(S)");
@@ -53,15 +63,19 @@ public class MenuBar extends JMenuBar implements ActionListener{
 
         initFile();
         initEdit();
+        initRun();
         initWindow();
         initNukkit();
+        initUtil();
 
         this.setBackground(Controller.getColors().get("MENU_BAR"));
         this.add(file);
         this.add(edit);
+        this.add(run);
         this.add(window);
         this.add(plugin);
         this.add(setting);
+        this.add(util);
     }
     
     private void initFile(){
@@ -127,11 +141,6 @@ public class MenuBar extends JMenuBar implements ActionListener{
         nukkitDictionary.setBorderPainted(false);
         nukkitDictionary.addActionListener(this);
         nukkitDictionary.setPreferredSize(new Dimension(300, (int) nukkitDictionary.getPreferredSize().getHeight()));
-        
-        nukkitTest = new JMenuItem("Nukkitでテスト");
-        nukkitTest.setActionCommand("nukkitTest");
-        nukkitTest.setBorderPainted(false);
-        nukkitTest.addActionListener(this);
 
         nukkitSetting = new JMenuItem("Nukkitの設定");
         nukkitSetting.setActionCommand("nukkitSetting");
@@ -143,23 +152,74 @@ public class MenuBar extends JMenuBar implements ActionListener{
         pmmpDictionary.setBorderPainted(false);
         pmmpDictionary.addActionListener(this);
         
-        pmmpTest = new JMenuItem("PMMPでテスト");
-        pmmpTest.setActionCommand("pmmpTest");
-        pmmpTest.setBorderPainted(false);
-        pmmpTest.addActionListener(this);
-        
         pmmpSetting = new JMenuItem("PMMPの設定");
         pmmpSetting.setActionCommand("pmmpSetting");
         pmmpSetting.setBorderPainted(false);
         pmmpSetting.addActionListener(this);
 
         plugin.add(nukkitDictionary);
-        //plugin.add(nukkitTest);
         plugin.add(nukkitSetting);
         plugin.addSeparator();
         plugin.add(pmmpDictionary);
-        //plugin.add(pmmpTest);
         plugin.add(pmmpSetting);
+    }
+    
+    private void initRun() {
+    	run = new JMenu("実行(R)");
+    	run.setBorderPainted(false);
+    	
+        doRun = new JMenuItem("実行");
+        doRun.setActionCommand("doRun");
+        doRun.setBorderPainted(false);
+        doRun.addActionListener(this);
+        doRun.setPreferredSize(new Dimension(300, (int) doRun.getPreferredSize().getHeight()));
+        
+        runBefore = new JMenuItem("前回の起動を実行");
+        runBefore.setActionCommand("runBefore");
+        runBefore.setBorderPainted(false);
+        runBefore.addActionListener(this);
+
+        runProject = new JMenuItem("プロジェクトを実行");
+        runProject.setActionCommand("runProject");
+        runProject.setBorderPainted(false);
+        runProject.addActionListener(this);
+        
+        nukkitTest = new JMenuItem("Nukkitで実行");
+        nukkitTest.setActionCommand("nukkitTest");
+        nukkitTest.setBorderPainted(false);
+        nukkitTest.addActionListener(this);
+        
+        pmmpTest = new JMenuItem("PMMPで実行");
+        pmmpTest.setActionCommand("pmmpTest");
+        pmmpTest.setBorderPainted(false);
+        pmmpTest.addActionListener(this);
+        
+        run.add(doRun);
+        run.add(runBefore);
+        run.add(runProject);
+        run.addSeparator();
+        run.add(nukkitTest);
+        run.add(pmmpTest);
+        
+    }
+    
+    private void initUtil() {
+    	util = new JMenu("ユーティティ");
+    	util.setBorderPainted(false);
+    	
+        color = new JMenuItem("カラーピッカー");
+        color.setActionCommand("color");
+        color.setBorderPainted(false);
+        color.addActionListener(this);
+        color.setPreferredSize(new Dimension(300, (int) color.getPreferredSize().getHeight()));
+        
+        shell = new JMenuItem("シェル");
+        shell.setActionCommand("shell");
+        shell.setBorderPainted(false);
+        shell.addActionListener(this);
+        
+        util.add(color);
+        util.add(shell);
     }
 
     @Override
@@ -193,6 +253,11 @@ public class MenuBar extends JMenuBar implements ActionListener{
             		return;
             	}
             	Controller.openNukkitTest();
+            	break;
+            	
+            case "color":
+            	JColorChooser cs = new JColorChooser();
+            	cs.setVisible(true);
             	break;
                 
         }

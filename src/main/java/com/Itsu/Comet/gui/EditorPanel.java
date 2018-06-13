@@ -28,11 +28,14 @@ import com.Itsu.Comet.core.Controller;
 import com.Itsu.Comet.editor.IndentAction;
 import com.Itsu.Comet.editor.LineNumberView;
 import com.Itsu.Comet.editor.SyntaxHighliter;
-import com.Itsu.Comet.editor.Java.JavaParser;
+import com.Itsu.Comet.editor.Java.JavaSyntaxHighliter;
+import com.Itsu.Comet.editor.Java.JavaSyntaxParser;
 import com.Itsu.Comet.editor.Java.JavaVariable;
 import com.Itsu.Comet.listener.HighlightListener;
 import com.Itsu.Comet.listener.TextPaneListener;
 import com.Itsu.Comet.ui.BlackScrollBarUI;
+import com.github.javaparser.ParseProblemException;
+import com.github.javaparser.TokenRange;
 
 /**
  *
@@ -52,7 +55,7 @@ public class EditorPanel extends JScrollPane{
     private final transient Highlighter.HighlightPainter highlightPainter = new DefaultHighlighter.DefaultHighlightPainter(new Color(87, 253, 203));
 
     private AutoGUI autoGUI;
-    private JavaParser parser;
+    private JavaSyntaxParser parser;
 
     private Highlighter highlighter;
 
@@ -67,12 +70,17 @@ public class EditorPanel extends JScrollPane{
 
     private boolean period = true;
 	private boolean completing = false;
+	
+	private long typeTime = System.currentTimeMillis();
+	private boolean isParsed = false;
 
     public EditorPanel(SyntaxHighliter jsh){
         this(jsh, null);
     }
 
     public EditorPanel(SyntaxHighliter jsh, String text){
+    	timer();
+    	
         this.setViewportView(jp);
 
         if(jsh != null){
@@ -85,7 +93,7 @@ public class EditorPanel extends JScrollPane{
 
         view = new LineNumberView(jp);
         autoGUI = new AutoGUI(this);
-        parser = new JavaParser(this);
+        if (jsh instanceof JavaSyntaxParser) parser = new JavaSyntaxParser(this);
 
         jp.setPreferredSize(this.getMaximumSize());
         jp.setBackground(Controller.getColors().get("EDITOR"));
@@ -101,14 +109,18 @@ public class EditorPanel extends JScrollPane{
             public void keyPressed(KeyEvent e){
             	
             	//e.consume();
+            	
+            	isParsed = false;
+            	typeTime = System.currentTimeMillis();
 
                 String insert = null;
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
                 	
                 	e.consume();
                 	
+                	/*
                 	if(completing) {
-                		
+                		/*
                 		int offset = jp.getCaretPosition();
                 		int start = 0, end = 0;
                 		boolean next = false;
@@ -167,7 +179,7 @@ public class EditorPanel extends JScrollPane{
                 		
                 		return;
                 		
-                	}
+                	}*/
                 	
                     for(int i=0; i<ia.getTabSize(jp); i++){
                         insert += "\t";
@@ -181,7 +193,12 @@ public class EditorPanel extends JScrollPane{
                         try{
                             Point point = jp.getCaret().getMagicCaretPosition();
 
-                            parse();
+                            try {
+                            	parse();
+                            	
+                            } catch (ParseProblemException ex) {
+                            	
+                            }
 
                             autoGUI.setLocation(Controller.getEditor().getX() + 50 + point.x, Controller.getEditor().getY() + 133 + point.y);
                             autoGUI.setOffset(jp.getCaretPosition());
@@ -239,7 +256,8 @@ public class EditorPanel extends JScrollPane{
                 	
                 }
             }
-                public void keyReleased(KeyEvent e){}
+                public void keyReleased(KeyEvent e){ }
+                
                 public void keyTyped(KeyEvent e){}
         });
 
@@ -259,7 +277,7 @@ public class EditorPanel extends JScrollPane{
         this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         this.setAutoscrolls(true);
-        this.setBackground(new Color(197,202,233));
+        this.setBackground(new Color(197, 202, 233));
         this.setForeground(Color.LIGHT_GRAY);
         this.getHorizontalScrollBar().setUI(new BlackScrollBarUI());
         this.getVerticalScrollBar().setUI(new BlackScrollBarUI());
@@ -335,17 +353,37 @@ public class EditorPanel extends JScrollPane{
         return this.jp;
     }
 
-    public JavaParser getParser() {
+    public JavaSyntaxParser getParser() {
         return this.parser;
     }
 
     public void parse() {
         parser.parse();
     }
-
     
     public void setCompleting(boolean b) {
     	this.completing = b;
+    }
+    
+    private void timer() {
+    	Thread th = new Thread(() -> {
+    		try {
+	    		while(true) {
+	            	if((System.currentTimeMillis() - typeTime) > 1000 && !isParsed) {
+	            		try {
+	                    	parse();
+	                    	isParsed = true;
+	                    } catch (ParseProblemException ex) {
+	                    	
+	                    }
+	            	}
+					Thread.sleep(1000);
+	    		}
+	    	} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+    	});
+    	th.start();
     }
 
 }

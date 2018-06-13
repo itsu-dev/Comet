@@ -6,6 +6,7 @@ import java.awt.Font;
 
 import javax.swing.UIManager;
 
+import com.Itsu.Comet.ui.SimpleSeparatorUI;
 import com.Itsu.Comet.utils.Data;
 
 /**
@@ -55,6 +56,15 @@ public class UIController {
         UIManager.put("TabbedPane.selected", Controller.getColors().get(5));
         UIManager.put("TabbedPane.selectHighlight", Controller.getColors().get(5));
         UIManager.put("TabbedPane.borderHightlightColor", Controller.getColors().get(5));
+    	UIManager.put("TabbedPane.focus", Controller.getColors().get(5));
+        UIManager.put("OptionPane.background", Controller.getColors().get("EDITOR"));
+        UIManager.put("OptionPane.foreground", Controller.getColors().get("EDITOR_TEXT"));
+        UIManager.put("OptionPane.warningDialog.titlePane.background", Controller.getColors().get("EDITOR"));
+        UIManager.put("OptionPane.errorDialog.titlePane.background", Controller.getColors().get("EDITOR"));
+        UIManager.put("OptionPane.informationDialog.titlePane.background", Controller.getColors().get("EDITOR"));
+        UIManager.put("OptionPane.warningDialog.border.background", Controller.getColors().get("EDITOR"));
+        UIManager.put("OptionPane.errorDialog.border.background", Controller.getColors().get("EDITOR"));
+        UIManager.put("OptionPane.informationDialog.border.background", Controller.getColors().get("EDITOR"));
         UIManager.put("InternalFrame.useTaskBar", Boolean.TRUE);
         UIManager.put("InternalFrame.activeTitleBackground", Controller.getColors().get("TITLE_BAR"));
         UIManager.put("InternalFrame.activeTitleForeground", Color.WHITE);
@@ -71,7 +81,7 @@ public class UIController {
         UIManager.put("List.selectionForeground", Controller.getColors().get("EDITOR_TEXT"));
         UIManager.put("List.focusCellHighlightBorder", Controller.getColors().get("MENU_BAR_SELECT"));
         UIManager.put("List.font", new Font(Controller.getDataObject().getSystemFont(), Font.PLAIN, 12));
-        UIManager.put("Separator.foreground", Color.LIGHT_GRAY);
+        //UIManager.put("PopupMenuSeparatorUI", new SimpleSeparatorUI());
         UIManager.put("Label.font", new Font(Controller.getDataObject().getSystemFont(), Font.PLAIN, 12));
         UIManager.put("CheckBox.font", new Font(Controller.getDataObject().getSystemFont(), Font.PLAIN, 12));
 	}

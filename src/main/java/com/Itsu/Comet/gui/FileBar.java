@@ -11,6 +11,18 @@ import javax.swing.JPanel;
 import com.Itsu.Comet.core.Controller;
 import com.Itsu.Comet.ui.FileLabel;
 
+/**
+ *
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ *
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ *
+ * @author Itsu
+ *
+ */
+
 public class FileBar extends JPanel {
 	
 	private String[] data;

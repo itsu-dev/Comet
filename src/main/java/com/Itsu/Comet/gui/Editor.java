@@ -81,7 +81,7 @@ public class Editor extends View{
 
     public void addTab(String title, String path, JComponent comp){
     	try{
-	    	if(!Controller.isOpenedFile(Controller.getProjectFileByPath(path))){
+	    	if(Controller.isOpenedFile(Controller.getProjectFileByPath(path))){
 	    		return;
 	    	}else{
 		        this.tab.addTab(title, comp);

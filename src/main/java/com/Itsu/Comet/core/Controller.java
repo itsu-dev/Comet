@@ -1,6 +1,7 @@
 package com.Itsu.Comet.core;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -19,6 +20,7 @@ import com.Itsu.Comet.gui.ProjectSetter;
 import com.Itsu.Comet.gui.ProjectTab;
 import com.Itsu.Comet.gui.TaskBar;
 import com.Itsu.Comet.gui.View;
+import com.Itsu.Comet.gui.Window;
 import com.Itsu.Comet.project.ProjectFile;
 import com.Itsu.Comet.project.ProjectMaker;
 import com.Itsu.Comet.project.ProjectManager;
@@ -26,6 +28,7 @@ import com.Itsu.Comet.utils.Colors;
 import com.Itsu.Comet.utils.Data;
 import com.Itsu.Comet.utils.MessagePopup;
 import com.Itsu.Comet.utils.Utils;
+import com.Itsu.Comet.utils.VersionChecker;
 
 /**
  *
@@ -45,10 +48,15 @@ public class Controller {
     private static Colors color = new Colors();
     private static TaskBar bar;
     private static FileBar fileBar;
+    private static Window window;
     private static AutoComplete<Object> complete = new AutoComplete<>();
 
     public Controller(){
 
+    }
+    
+    public static void checkVersion() {
+    	new VersionChecker();
     }
 
     public static void initData(){
@@ -102,6 +110,10 @@ public class Controller {
             Server.removeActiveWindow(view, key);
             Server.addActiveWindow(view, key);
             Server.getDesktopPane().add(view);
+            
+            if(Controller.window == null && view instanceof Window) {
+            	Controller.window = (Window) view;
+            }
         }
     }
 
@@ -110,6 +122,19 @@ public class Controller {
             Server.removeActiveWindow(view, key);
         }
     }
+    
+    public static void openTab(String title, JComponent com) {
+    	window.addTab(title, com);
+    }
+    
+    public static String[] getTabTitles() {
+    	return window.getTabTitles();
+    }
+    
+    public static Component getTabByTitle(String title) {
+    	return window.getTabByTitle(title);
+    }
+    
     protected static void setTaskBar(TaskBar bar) {
         Controller.bar = bar;
     }
@@ -163,7 +188,7 @@ public class Controller {
     }
 
     public static ProjectFile getProjectFileByPath(String path) {
-        return Server.getProjectFileByPath(path);
+        return Utils.buildProjectFile(path);
     }
 
     public static ProjectFile getProjectFileByName(String name) {

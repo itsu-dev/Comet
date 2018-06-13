@@ -5,6 +5,18 @@ import java.awt.Graphics;
 
 import javax.swing.JLabel;
 
+/**
+ *
+ * <h6>Comet project</h6>
+ * <p>for PMMP/Jupiter/Nukkit plugin
+ *
+ * <p>Java（PHP）構文向けIDEプロジェクト
+ * <p>Made by Itsu(Twitter: @itsu_dev)
+ *
+ * @author Itsu
+ *
+ */
+
 public class FileLabel extends JLabel {
 	
 	public FileLabel(String str) {

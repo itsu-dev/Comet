@@ -130,16 +130,6 @@ public class Server{
         return openFiles.contains(proj);
     }
     
-    protected static ProjectFile getProjectFileByPath(String path) {
-    	for(ProjectFile proj : openFiles) {
-    		if(proj.getPath().equals(path)) {
-    			return proj;
-    		}
-    	}
-    	
-    	return null;
-    }
-    
     protected static ProjectFile getProjectFileByName(String name) {
     	for(ProjectFile proj : openFiles) {
     		if(proj.getName().equals(name)) {

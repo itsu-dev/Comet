@@ -1,5 +1,9 @@
 package com.Itsu.Comet.editor.Java;
 
+import java.util.EnumSet;
+
+import com.github.javaparser.ast.Modifier;
+
 /**
  * 
  * <h6>Comet project</h6>
@@ -14,20 +18,20 @@ package com.Itsu.Comet.editor.Java;
 
 public class JavaVariable {
 	
-	public String type;
+	public EnumSet<Modifier> modifier;
 	public String name;
 	public String className;
 	public boolean isImported;
 	
-	public JavaVariable(String name, String type, String className, boolean isImported) {
+	public JavaVariable(String name, EnumSet<Modifier> modifier, String className, boolean isImported) {
 		this.name = name;
-		this.type = type;
+		this.modifier = modifier;
 		this.className = className;
 		this.isImported = isImported;
 	}
 	
-	public String getType() {
-		return type;
+	public EnumSet<Modifier> getModifiers() {
+		return modifier;
 	}
 	
 	public String getName() {
@@ -44,6 +48,18 @@ public class JavaVariable {
 	
 	public void setClassName(String className) {
 		this.className = className;
+	}
+	
+	public void setName(String name) {
+		this.name =  name;
+	}
+	
+	public void setModifiers(EnumSet<Modifier> modifier) {
+		this.modifier = modifier;
+	}
+
+	public void setImported(boolean b) {
+		this.isImported = b;
 	}
 
 }

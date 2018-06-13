@@ -40,9 +40,6 @@ public class Comet extends JFrame {
     }
 
     public static void main(String[] args){
-    	/*
-        System.setProperty("awt.useSystemAAFontSettings","on");
-        System.setProperty("swing.aatext", "true");*/
         Toolkit.getDefaultToolkit().setDynamicLayout(true);
 
         try {
@@ -55,6 +52,7 @@ public class Comet extends JFrame {
         instance = comet;
 
         Controller.checkFile();
+        Controller.checkVersion();
 
         Controller.initData();
         Controller.initSkinColor();

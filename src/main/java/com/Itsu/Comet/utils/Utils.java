@@ -18,11 +18,13 @@ import java.lang.management.ThreadInfo;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 import javax.swing.ImageIcon;
 
 import com.Itsu.Comet.core.Controller;
+import com.Itsu.Comet.project.ProjectFile;
 
 /**
  * 
@@ -129,6 +131,38 @@ public class Utils {
             if (fo != null) fo.close();
             if (out != null) out.close();
         }
+    }
+    
+    public static void expansionFiles(String from, String temp) {
+    	try {
+	    	from.replaceAll("\\\\", "/");
+	    	temp.replaceAll("\\\\", "/");
+	    		
+	    	File[] files = new File(from).listFiles();
+	    	for(File file : files) {
+	    		if(file.isDirectory()) {
+	    			expansionFiles(file.getAbsolutePath(), temp);
+	    			
+	    		} else {
+	    			String tempFile = "./" + file.getPath().replaceFirst(Controller.getDataObject().getWorkspacePass(), "");
+	    			List<String> pathes = Arrays.asList(tempFile.split("/"));
+	    			pathes.remove("src");
+	    			pathes.remove("resources");
+	    			pathes.add(2, "temp");
+	    			String path = "";
+	    			
+	    			for(String str : pathes) {
+	    				path += str + "/";
+	    			}
+	    			
+	    			new File(path).mkdirs();
+	    			
+	    			copyFile(file, new File(path + File.separator + file.getName()));
+	    		}
+	    	}
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    	}
     }
 
     public static String getAllThreadDumps() {
@@ -250,6 +284,12 @@ public class Utils {
         }
 
         return result;
+    }
+    
+    public static ProjectFile buildProjectFile(String path) {
+    	ProjectFile result = null;
+    	result = new ProjectFile(getProjectName(path), path, getType(path));
+    	return result;
     }
 
     public static String[] getPathArray(String path){

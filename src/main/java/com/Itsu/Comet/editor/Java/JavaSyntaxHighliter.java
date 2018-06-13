@@ -33,6 +33,7 @@ public class JavaSyntaxHighliter extends DefaultStyledDocument implements Syntax
     private static final String OPERANDS = ".,(){;";
 
     private MutableAttributeSet keyword;
+    private MutableAttributeSet staticKeyword;
     private MutableAttributeSet primitive;
     private MutableAttributeSet text;
     private MutableAttributeSet annotation;
@@ -55,6 +56,10 @@ public class JavaSyntaxHighliter extends DefaultStyledDocument implements Syntax
         keyword = new SimpleAttributeSet();
         StyleConstants.setForeground(keyword, Controller.getJavaColors().get("keyword"));
         StyleConstants.setBold(keyword, true);
+        
+        staticKeyword = new SimpleAttributeSet();
+        StyleConstants.setForeground(staticKeyword, Controller.getJavaColors().get("field"));
+        StyleConstants.setBold(staticKeyword, true);
         
         primitive = new SimpleAttributeSet();
         StyleConstants.setForeground(primitive, Controller.getJavaColors().get("primitive"));
@@ -186,13 +191,19 @@ public class JavaSyntaxHighliter extends DefaultStyledDocument implements Syntax
         processChangedLines(offset, length);
     }
     
-    public void setVariable(int offset, String var) throws BadLocationException {
+    public void setVariable(int line, int column, String var) throws BadLocationException {
     	fields.add(var);
-    	setCharacterAttributes(offset, var.length(), field, false);
+    	setCharacterAttributes(getDefaultRootElement().getElement(line - 1).getStartOffset() + column - 1, var.length(), field, false);
     }
     
-    public void setComment(int offset, String var) throws BadLocationException {
-    	setCharacterAttributes(offset, var.length(), comment, false);
+    public void setStaticVariable(int line, int column, String var) throws BadLocationException {
+    	fields.add(var);
+    	setCharacterAttributes(getDefaultRootElement().getElement(line - 1).getStartOffset() + column - 1, var.length(), staticKeyword, false);
+    }
+    
+    public void setComment(int line, int column, String var) throws BadLocationException {
+    	fields.add(var);
+    	setCharacterAttributes(getDefaultRootElement().getElement(line - 1).getStartOffset() + column - 1, var.length() + 2, oneLineCom, false);
     }
 
     @Override public void remove(int offset, int length) throws BadLocationException {
